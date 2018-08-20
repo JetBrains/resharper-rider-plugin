@@ -1,0 +1,16 @@
+{
+    "author": "Matthias Koch",
+    "classifications": [ "jetbrains", "resharper", "rider" ],
+    "name": "ReSharper/Rider Plugin",
+    "identity": "JetBrains.ReSharper.SamplePlugin",
+    "shortName": "resharper-plugin",
+    "tags": {
+        "type": "project",
+        "language": "C#",     
+        "platform": ".NET"
+    },
+    "sourceName": "SamplePlugin",
+    "preferNameDirectory" : "true",
+    "primaryOutputs": [
+    ]
+}

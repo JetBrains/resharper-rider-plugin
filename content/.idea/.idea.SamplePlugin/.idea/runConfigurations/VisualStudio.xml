@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="VisualStudio" type="BashConfigurationType" factoryName="Bash" singleton="true">
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="INTERPRETER_PATH" value="C:\Windows\System32\cmd.exe" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="/c" />
+    <option name="PARAMETERS" value="powershell -ExecutionPolicy ByPass -NoProfile -File runVisualStudio.ps1" />
+    <module name="" />
+    <method v="2" />
+  </configuration>
+</component>
