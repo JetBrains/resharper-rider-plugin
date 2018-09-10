@@ -1,6 +1,5 @@
 Param(
     $RootSuffix = "SamplePlugin",
-    $NoEap = $false,
     $Version = "1.0.0"
 )
 
@@ -13,11 +12,7 @@ $UserProjectXmlFile = "$SourceBasePath\$PluginId\$PluginId.csproj.user"
 
 if (!(Test-Path "$UserProjectXmlFile")) {
     # Determine download link
-    if ($NoEap) {
-        $ReleaseUrl = "https://data.services.jetbrains.com/products/releases?code=RSU&type=release"
-    } else {
-        $ReleaseUrl = "https://data.services.jetbrains.com/products/releases?code=RSU&type=eap"
-    }
+    $ReleaseUrl = "https://data.services.jetbrains.com/products/releases?code=RSU&type=eap&type=release"
     $DownloadLink = [uri] $(Invoke-WebRequest -UseBasicParsing $ReleaseUrl | ConvertFrom-Json).RSU[0].downloads.windows.link
 
     # Download installer
@@ -56,7 +51,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     }
 
     # Install plugin
-    Invoke-Exe $MSBuildPath "/t:Pack" "$SolutionPath" "/v:minimal" "/p:PackageVersion=$Version" "/p:PackageOutputPath=`"$OutputDirectory`""
+    Invoke-Exe $MSBuildPath "/t:Restore;Build;Pack" "$SolutionPath" "/v:minimal" "/p:PackageVersion=$Version" "/p:PackageOutputPath=`"$OutputDirectory`""
     Invoke-Exe $NuGetPath install $PluginId -OutputDirectory "$PluginRepository" -Source "$OutputDirectory" -DependencyVersion Ignore
 
     Write-Output "Re-installing experimental hive"
@@ -77,11 +72,15 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     $VersionsPropsFile = "$SourceBasePath\Versions.props"
     $VersionsPropsXml = [xml] (Get-Content "$VersionsPropsFile")
     $SdkVersionNode = $VersionsPropsXml.SelectSingleNode(".//SdkVersion")
-    if ($NoEap) {
-        $SdkVersionNode.InnerText = "$($VersionSplit[2]).$($VersionSplit[3]).0"
+    if ($VersionSplit.Count -eq 5){
+        $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).0"
+    } elseif ($VersionSplit[4].StartsWith("EAP")) {
+        $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).0-*"
     } else {
-        $SdkVersionNode.InnerText = "$($VersionSplit[2]).$($VersionSplit[3]).0-*"
+        $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).$($VersionSplit[4])"
     }
+    $SdkVersionNode.InnerText = $SdkVersion
+    $VersionsPropsXml.Save("$VersionsPropsFile")
 } else {
     Write-Warning "Plugin is already installed. To trigger reinstall, delete $UserProjectXmlFile."
 }
