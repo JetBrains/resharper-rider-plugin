@@ -12,7 +12,7 @@ Download the `JetBrains.ReSharper.SamplePlugin.*.nupkg` template package from th
 dotnet new --install JetBrains.ReSharper.SamplePlugin --nuget-source ./
 ```
 
-Afterwards, to create a new plugin called `MyAwesomePlugin`, invoke:
+Afterwards, a new project can be created from the installed template. The `name` identifier should be letters-only:
 
 ```
 dotnet new resharper-plugin --name MyAwesomePlugin
