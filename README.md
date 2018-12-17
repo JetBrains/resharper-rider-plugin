@@ -6,7 +6,7 @@ This repository defines a template for easy development of ReSharper and Rider p
 
 ## Getting Started
 
-Download the template package from the [releases page](https://github.com/matkoch/resharper-sampleplugin/releases) and invoke from the download directory:
+Download the `JetBrains.ReSharper.SamplePlugin.*.nupkg` template package from the [releases page](https://github.com/matkoch/resharper-sampleplugin/releases) and invoke from the download directory:
 
 ```
 dotnet new --install JetBrains.ReSharper.SamplePlugin --nuget-source ./
