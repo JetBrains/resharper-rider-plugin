@@ -3,4 +3,4 @@ $ErrorActionPreference = "Stop"
 
 . ".\settings.ps1"
 
-Invoke-Exe $MSBuildPath "/t:Rebuild" "$SolutionPath" "/v:minimal"
+Invoke-Exe $MSBuildPath "/t:Restore;Rebuild" "$SolutionPath" "/v:minimal"

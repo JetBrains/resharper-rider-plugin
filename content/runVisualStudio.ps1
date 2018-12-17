@@ -51,7 +51,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     }
 
     # Install plugin
-    Invoke-Exe $MSBuildPath "/t:Restore;Build;Pack" "$SolutionPath" "/v:minimal" "/p:PackageVersion=$Version" "/p:PackageOutputPath=`"$OutputDirectory`""
+    Invoke-Exe $MSBuildPath "/t:Restore;Rebuild;Pack" "$SolutionPath" "/v:minimal" "/p:PackageVersion=$Version" "/p:PackageOutputPath=`"$OutputDirectory`""
     Invoke-Exe $NuGetPath install $PluginId -OutputDirectory "$PluginRepository" -Source "$OutputDirectory" -DependencyVersion Ignore
 
     Write-Output "Re-installing experimental hive"
@@ -85,5 +85,5 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     Write-Warning "Plugin is already installed. To trigger reinstall, delete $UserProjectXmlFile."
 }
 
-Invoke-Exe $MSBuildPath "/t:Rebuild" "$SolutionPath" "/v:minimal"
+Invoke-Exe $MSBuildPath "/t:Restore;Rebuild" "$SolutionPath" "/v:minimal"
 Invoke-Exe $DevEnvPath "/rootSuffix $RootSuffix" "/ReSharper.Internal"
