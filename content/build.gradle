@@ -22,6 +22,7 @@ ext {
     rdLibDirectory = new File(repoRoot, "build/riderRD-$sdkVersion-SNAPSHOT/lib/rd")
     dotNetDir = new File(repoRoot, "src/dotnet")
     dotNetPluginId = "ReSharperPlugin.SamplePlugin"
+    dotnetSolution = new File(repoRoot, "SamplePlugin.sln")
 }
 
 repositories {
@@ -67,9 +68,23 @@ compileKotlin {
 
 task compileDotNet {
     doLast {
-        exec {
-            executable "powershell"
-            args "-ExecutionPolicy","ByPass","-NoProfile","-File","$rootDir/buildPlugin.ps1"
+        if (isWindows) {
+            exec {
+                executable "powershell"
+                args "-ExecutionPolicy","ByPass","-NoProfile","-File","$rootDir/buildPlugin.ps1"
+            }
+        } else {
+            ByteArrayOutputStream stdout = new ByteArrayOutputStream()
+            exec {
+                executable 'which'
+                args 'msbuild'
+                standardOutput = stdout
+                workingDir project.rootDir
+            }
+            exec {
+                executable stdout.toString().trim()
+                args "/t:Restore;Rebuild;Pack","$dotnetSolution","/v:minimal"
+            }
         }
     }
 }
