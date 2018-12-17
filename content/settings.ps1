@@ -3,8 +3,7 @@ $PluginId = "ReSharperPlugin.SamplePlugin"
 $SolutionPath = "$PSScriptRoot\SamplePlugin.sln"
 $SourceBasePath = "$PSScriptRoot\src\dotnet"
 
-$VisualStudioBaseDirectory = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\*\"
-if (@(Get-ChildItem "$VisualStudioBaseDirectory").Count -ne 1) { throw "Could not find single VisualStudio base directory. Please adjust the search pattern. " }
+$VisualStudioBaseDirectory = & "$PSScriptRoot\tools\vswhere.exe" "-latest" "-property" "installationPath"
 $DevEnvPath = Get-ChildItem "$VisualStudioBaseDirectory\Common7\IDE\devenv.exe"
 $MSBuildPath = Get-ChildItem "$VisualStudioBaseDirectory\MSBuild\15.0\Bin\MSBuild.exe"
 
