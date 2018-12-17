@@ -132,6 +132,8 @@ patchPluginXml {
 }
 
 prepareSandbox {
+    dependsOn compileDotNet
+
     def outputFolder = "$dotNetDir/$dotNetPluginId/bin/${dotNetPluginId}.Rider/$BuildConfiguration"
     def dllFiles = [
             "$outputFolder/${dotNetPluginId}.Rider.dll",
