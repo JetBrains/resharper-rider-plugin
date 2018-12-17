@@ -20,7 +20,7 @@ dotnet new resharper-plugin --name MyAwesomePlugin
 
 This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`.
 
-_The only thing that currently needs to be updated manually is the `RIDER_PLUGIN_ID` in `README.md`, which you'll only get after uploading your Rider plugin the first time._
+:warning: _The only place that currently needs to be updated manually is the `RIDER_PLUGIN_ID` in `README.md`, which you'll only get after uploading your Rider plugin the first time._
 
 ## Development
 
