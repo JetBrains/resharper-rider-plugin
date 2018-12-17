@@ -4,6 +4,7 @@
 build
 output
 .gradle
+.tmp
 
 # User-specific files
 *.suo
