@@ -66,36 +66,59 @@ compileKotlin {
     kotlinOptions { jvmTarget = "1.8" }
 }
 
-task compileDotNet {
+task findMsBuild {
     doLast {
+        ByteArrayOutputStream stdout = new ByteArrayOutputStream()
         if (isWindows) {
             exec {
-                executable "powershell"
-                args "-ExecutionPolicy","ByPass","-NoProfile","-File","$rootDir/buildPlugin.ps1"
+                executable "$repoRoot\\tools\\vswhere.exe"
+                args '-latest','-property','installationPath'
+                standardOutput = stdout
+                workingDir project.rootDir
             }
+            List<String> files = new FileNameFinder().getFileNames("${stdout.toString().trim()}\\MSBuild", "**/MSBuild.exe")
+            ext.executable = files.get(0)
         } else {
-            ByteArrayOutputStream stdout = new ByteArrayOutputStream()
             exec {
                 executable 'which'
                 args 'msbuild'
                 standardOutput = stdout
                 workingDir project.rootDir
             }
-            exec {
-                executable stdout.toString().trim()
-                args "/t:Restore;Rebuild;Pack","$dotnetSolution","/v:minimal"
-            }
+            ext.executable = stdout.toString().trim()
+        }
+    }
+}
+
+task compileDotNet {
+    dependsOn findMsBuild
+    doLast {
+        exec {
+            executable findMsBuild.executable
+            args "/t:Restore;Rebuild","$dotnetSolution","/v:minimal","/p:Configuration=$BuildConfiguration"
         }
     }
 }
 
 buildPlugin {
-    dependsOn compileDotNet
+    dependsOn findMsBuild
+    outputs.upToDateWhen { false }
+    doLast {
+        copy {
+            from "$buildDir/distributions/$rootProject.name-${version}.zip"
+            into "$rootDir/output"
+        }
 
-    copy {
-        from "$rootDir/build/distributions"
-        into "$rootDir/output"
-        include "*"
+        def changelogText = file("$repoRoot/CHANGELOG.md").text
+        def changelogMatches = changelogText =~ /(?s)(-.+?)(?=##|$)/
+        def changeNotes = changelogMatches.collect {
+            it[1].replaceAll(/(?s)- /, "\u2022 ").replaceAll(/`/, "").replaceAll(/,/, "%2C")
+        }.take(1).join("")
+
+        exec {
+            executable findMsBuild.executable
+            args "/t:Pack","$dotnetSolution","/v:minimal","/p:Configuration=$BuildConfiguration","/p:PackageOutputPath=$rootDir/output","/p:PackageReleaseNotes=$changeNotes","/p:PackageVersion=$version"
+        }
     }
 }
 
@@ -137,13 +160,11 @@ rdgen {
 
 patchPluginXml {
     def changelogText = file("$repoRoot/CHANGELOG.md").text
-    def changelogMatches = changelogText =~ /(?s)##(.+?)(.+?)(?=##|$)/
+    def changelogMatches = changelogText =~ /(?s)(-.+?)(?=##|$)/
 
     changeNotes = changelogMatches.collect {
-        def versionTitle = it[1]
-        def versionText = it[2].replaceAll(/(?s)\r?\n/, "<br />\n")
-        "<b>$versionTitle</b>$versionText"
-    }.take(10).join('')
+        it[1].replaceAll(/(?s)\r?\n/, "<br />\n")
+    }.take(1).join('')
 }
 
 prepareSandbox {
