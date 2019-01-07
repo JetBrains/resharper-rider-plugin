@@ -5,7 +5,7 @@ $SourceBasePath = "$PSScriptRoot\src\dotnet"
 
 $VisualStudioBaseDirectory = & "$PSScriptRoot\tools\vswhere.exe" "-latest" "-property" "installationPath"
 $DevEnvPath = Get-ChildItem "$VisualStudioBaseDirectory\Common7\IDE\devenv.exe"
-$MSBuildPath = Get-ChildItem "$VisualStudioBaseDirectory\MSBuild\15.0\Bin\MSBuild.exe"
+$MSBuildPath = Get-ChildItem "$VisualStudioBaseDirectory\MSBuild\*\Bin\MSBuild.exe"
 
 $OutputDirectory = "$PSScriptRoot\output"
 $NuGetPath = "$PSScriptRoot\tools\nuget.exe"
