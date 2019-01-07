@@ -40,7 +40,7 @@ wrapper {
 }
 
 if (!ext.has("BuildConfiguration"))
-    ext.BuildConfiguration = "Debug"
+    ext.BuildConfiguration = "Release"
 
 if (ext.has("pluginVersion"))
     ext.version = ext.pluginVersion
