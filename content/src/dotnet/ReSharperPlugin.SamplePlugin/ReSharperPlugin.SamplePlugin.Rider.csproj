@@ -9,7 +9,7 @@
   <PropertyGroup>
     <AssemblyName>ReSharperPlugin.SamplePlugin</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <IsPackable>true</IsPackable>
+    <IsPackable>false</IsPackable>
     <DefineConstants>$(DefineConstants);RIDER</DefineConstants>
   </PropertyGroup>
   
