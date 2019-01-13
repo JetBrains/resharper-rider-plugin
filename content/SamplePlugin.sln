@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{4A9ABB95-3
 ProjectSection(SolutionItems) = preProject
 	src\rider\main\resources\META-INF\plugin.xml = src\rider\main\resources\META-INF\plugin.xml
 	src\dotnet\Plugin.props = src\dotnet\Plugin.props
+	README.md = README.md
+	CHANGELOG.md = CHANGELOG.md
 EndProjectSection
 EndProject
 Global
