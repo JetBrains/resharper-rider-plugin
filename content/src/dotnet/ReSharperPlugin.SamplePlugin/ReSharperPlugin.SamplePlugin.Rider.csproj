@@ -7,8 +7,9 @@
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
   <PropertyGroup>
+    <AssemblyName>ReSharperPlugin.SamplePlugin</AssemblyName>
+    <RootNamespace>$(AssemblyName)</RootNamespace>
     <IsPackable>true</IsPackable>
-    <RootNamespace>ReSharperPlugin.SamplePlugin</RootNamespace>
     <DefineConstants>$(DefineConstants);RIDER</DefineConstants>
   </PropertyGroup>
   

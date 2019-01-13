@@ -172,8 +172,8 @@ prepareSandbox {
 
     def outputFolder = "$dotNetDir/$dotNetPluginId/bin/${dotNetPluginId}.Rider/$BuildConfiguration"
     def dllFiles = [
-            "$outputFolder/${dotNetPluginId}.Rider.dll",
-            "$outputFolder/${dotNetPluginId}.Rider.pdb"
+            "$outputFolder/${dotNetPluginId}.dll",
+            "$outputFolder/${dotNetPluginId}.pdb"
     ]
 
     dllFiles.forEach({ f ->
