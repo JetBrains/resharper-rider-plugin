@@ -67,11 +67,11 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     $HostIdentifierNode.InnerText = $HostIdentifier
     $ProjectXml.Save("$UserProjectXmlFile")
 
-    # Update Version.props
+    # Update Plugin.props
     $VersionSplit = $DownloadLink.Segments[-1].Split(".")
-    $VersionsPropsFile = "$SourceBasePath\Versions.props"
-    $VersionsPropsXml = [xml] (Get-Content "$VersionsPropsFile")
-    $SdkVersionNode = $VersionsPropsXml.SelectSingleNode(".//SdkVersion")
+    $PluginPropsFile = "$SourceBasePath\Plugin.props"
+    $PluginPropsXml = [xml] (Get-Content "$PluginPropsFile")
+    $SdkVersionNode = $PluginPropsXml.SelectSingleNode(".//SdkVersion")
     if ($VersionSplit.Count -eq 5){
         $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).0"
     } elseif ($VersionSplit[4].StartsWith("EAP")) {
@@ -80,7 +80,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
         $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).$($VersionSplit[4])"
     }
     $SdkVersionNode.InnerText = $SdkVersion
-    $VersionsPropsXml.Save("$VersionsPropsFile")
+    $PluginPropsXml.Save("$PluginPropsFile")
 } else {
     Write-Warning "Plugin is already installed. To trigger reinstall, delete $UserProjectXmlFile."
 }
