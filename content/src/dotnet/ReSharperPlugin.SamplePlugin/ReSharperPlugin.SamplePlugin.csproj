@@ -1,4 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project>
+
+  <PropertyGroup>
+    <LanguageTargets>$(MSBuildToolsPath)\Microsoft.CSharp.targets</LanguageTargets>
+  </PropertyGroup>
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   
   <PropertyGroup>
     <IsPackable>True</IsPackable>
@@ -6,8 +12,6 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
-  <Import Project="..\Versions.props" />
-  
   <ItemGroup>
     <PackageReference Include="JetBrains.ReSharper.SDK" Version="$(SdkVersion)">
       <PrivateAssets>all</PrivateAssets>
@@ -21,8 +25,12 @@
     <None Remove="Rider\**\*" />
     <EmbeddedResource Remove="Rider\**\*" />
     <Content Remove="Rider\**\*" />
-    
+  </ItemGroup>
+  
+  <ItemGroup>
     <Content Include="bin\ReSharperPlugin.SamplePlugin\$(Configuration)\ReSharperPlugin.SamplePlugin.*" PackagePath="dotFiles" Pack="true" />
   </ItemGroup>
   
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
 </Project>

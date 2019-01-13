@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReSharperPlugin.SamplePlugi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReSharperPlugin.SamplePlugin.Rider", "src\dotnet\ReSharperPlugin.SamplePlugin\ReSharperPlugin.SamplePlugin.Rider.csproj", "{084172D1-A9C6-46D0-96AD-05C5B09A5E5D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{4A9ABB95-3762-448B-B5BF-099E46DB22DE}"
+ProjectSection(SolutionItems) = preProject
+	src\rider\main\resources\META-INF\plugin.xml = src\rider\main\resources\META-INF\plugin.xml
+	src\dotnet\Plugin.props = src\dotnet\Plugin.props
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

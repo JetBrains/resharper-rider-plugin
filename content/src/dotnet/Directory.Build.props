@@ -16,5 +16,8 @@
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT</DefineConstants>
   </PropertyGroup>
+
+  <Import Project="Plugin.props" />
+  <Import Project="Versions.props" />
   
 </Project>

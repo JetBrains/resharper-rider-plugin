@@ -1,12 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  
+﻿<Project>
+
+  <PropertyGroup>
+    <LanguageTargets>$(MSBuildToolsPath)\Microsoft.CSharp.targets</LanguageTargets>
+  </PropertyGroup>
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <RootNamespace>ReSharperPlugin.SamplePlugin</RootNamespace>
     <DefineConstants>$(DefineConstants);RIDER</DefineConstants>
   </PropertyGroup>
-  
-  <Import Project="..\Versions.props" />
   
   <ItemGroup>
     <PackageReference Include="JetBrains.Rider.SDK" Version="$(SdkVersion)">
@@ -14,9 +18,7 @@
     </PackageReference>
     <PackageReference Include="Wave" Version="$(WaveVersion)" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Rider\Model" />
-  </ItemGroup>
-  
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
 </Project>
