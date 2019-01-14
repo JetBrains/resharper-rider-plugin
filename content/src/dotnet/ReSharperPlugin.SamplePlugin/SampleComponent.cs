@@ -1,23 +1,15 @@
-﻿using JetBrains.ProjectModel;
-#if RIDER
-using JetBrains.ReSharper.Host.Features;
-using JetBrains.Rider.Model;
-//using ReSharperPlugin.SamplePlugin.Rider.Model;
-#endif
+﻿using JetBrains.Application;
+using JetBrains.ReSharper.Feature.Services.QuickFixes;
+using JetBrains.ReSharper.Intentions.CSharp.QuickFixes;
 
-namespace ReSharperPlugin.SamplePlugin
+namespace ReSharperPlugin.CyclomaticComplexity
 {
-    [SolutionComponent]
-    public class SampleComponent
+    [ShellComponent]
+    internal class SampleQuickFixRegistrarComponent
     {
-        public SampleComponent(ISolution solution)
+        public SampleQuickFixRegistrarComponent(IQuickFixes table)
         {
-            
-            System.Diagnostics.Debugger.Launch();
-#if RESHARPER
-#elif RIDER
-            var model = solution.GetProtocolSolution().GetSamplePluginModel();
-#endif
+            table.RegisterQuickFix<SampleHighlighting>(null, h => new SampleFix(h.Declaration), typeof(SampleFix));
         }
     }
 }
