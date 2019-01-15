@@ -1,7 +1,6 @@
 <Project>
   
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
     <LangVersion>latest</LangVersion>
 
     <NoPackageAnalysis>true</NoPackageAnalysis>
