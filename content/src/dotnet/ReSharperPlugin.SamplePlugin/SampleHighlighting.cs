@@ -4,7 +4,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Util;
-using ReSharperPlugin.CyclomaticComplexity;
+using ReSharperPlugin.SamplePlugin;
 
 [assembly: RegisterConfigurableSeverity(
     SampleHighlighting.SeverityId,
@@ -14,7 +14,7 @@ using ReSharperPlugin.CyclomaticComplexity;
     Description: SampleHighlighting.Description,
     DefaultSeverity: Severity.WARNING)]
 
-namespace ReSharperPlugin.CyclomaticComplexity
+namespace ReSharperPlugin.SamplePlugin
 {
     [ConfigurableSeverityHighlighting(
         SeverityId,

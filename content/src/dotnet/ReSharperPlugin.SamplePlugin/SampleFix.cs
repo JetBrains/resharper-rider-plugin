@@ -6,7 +6,7 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
-namespace ReSharperPlugin.CyclomaticComplexity
+namespace ReSharperPlugin.SamplePlugin
 {
     public sealed class SampleFix : QuickFixBase
     {

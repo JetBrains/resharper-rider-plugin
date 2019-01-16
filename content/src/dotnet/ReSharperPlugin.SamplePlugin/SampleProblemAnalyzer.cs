@@ -2,7 +2,7 @@
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace ReSharperPlugin.CyclomaticComplexity
+namespace ReSharperPlugin.SamplePlugin
 {
     // Types mentioned in this attribute are used for performance optimizations
     [ElementProblemAnalyzer(

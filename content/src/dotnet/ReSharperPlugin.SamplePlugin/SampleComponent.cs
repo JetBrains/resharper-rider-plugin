@@ -2,7 +2,7 @@
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
 using JetBrains.ReSharper.Intentions.CSharp.QuickFixes;
 
-namespace ReSharperPlugin.CyclomaticComplexity
+namespace ReSharperPlugin.SamplePlugin
 {
     [ShellComponent]
     internal class SampleQuickFixRegistrarComponent
