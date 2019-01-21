@@ -1,0 +1,12 @@
+﻿public class |SampleTest|(0)
+{
+    public void |Method|(1)()
+    {
+        var |variableWithCamelCase|(2) = true;
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Sample highlighting message' (E) 'Sample highlighting error tooltip for 'SampleTest''
+(1): ReSharper Warning: (T) 'Sample highlighting message' (E) 'Sample highlighting error tooltip for 'Method''
+(2): ReSharper Warning: (T) 'Sample highlighting message' (E) 'Sample highlighting error tooltip for 'variableWithCamelCase''
