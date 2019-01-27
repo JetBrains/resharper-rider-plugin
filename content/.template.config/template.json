@@ -3,7 +3,7 @@
     "classifications": [ "jetbrains", "resharper", "rider" ],
     "name": "ReSharper/Rider Plugin",
     "identity": "JetBrains.ReSharper.SamplePlugin",
-    "shortName": "resharper-plugin",
+    "shortName": "resharper-rider-plugin",
     "tags": {
         "type": "project",
         "language": "C#",     
