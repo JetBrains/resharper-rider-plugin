@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="rdgen (Windows)" type="BashConfigurationType" factoryName="Bash" singleton="true">
+  <configuration default="false" name="Generate protocol (Windows)" type="BashConfigurationType" factoryName="Bash" singleton="true">
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="INTERPRETER_PATH" value="C:\Windows\System32\cmd.exe" />
     <option name="WORKING_DIRECTORY" value="" />
