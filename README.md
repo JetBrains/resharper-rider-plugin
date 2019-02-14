@@ -31,7 +31,7 @@ For general development, there are a couple of scripts/invocations worth knowing
 gradlew :runIde
 
 # For ReSharper (VisualStudio)
-powershell ./runVisualStudio.ps1
+powershell .\runVisualStudio.ps1
 ```
 
 If your Rider plugin requires a [model](https://www.jetbrains.com/help/resharper/sdk/Products/Rider.html) to share information between ReSharper backend and IntelliJ frontend, there is a sample protocol defined in `protocol` directory. To generate the Kotlin and C# implementation, call:
