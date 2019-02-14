@@ -15,7 +15,7 @@ dotnet new --install JetBrains.ReSharper.SamplePlugin --nuget-source ./
 Afterwards, a new project can be created from the installed template. The `name` identifier should be letters-only:
 
 ```
-dotnet new resharper-plugin --name MyAwesomePlugin
+dotnet new resharper-rider-plugin --name MyAwesomePlugin
 ```
 
 This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`. Metadata including project website, description, author and others should be entered in `Plugin.props` and `plugins.xml`.
