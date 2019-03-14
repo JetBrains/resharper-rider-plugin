@@ -30,7 +30,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     Invoke-Exe $InstallerFile "/VsVersion=15.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
 
     $PluginRepository = "$env:LOCALAPPDATA\JetBrains\plugins"
-    $InstallationDirectory = $(Get-ChildItem "$env:APPDATA\JetBrains\ReSharperPlatformVs*\v*_*$RootSuffix\NuGet.Config").Directory
+    $InstallationDirectory = $(Get-ChildItem "$env:APPDATA\JetBrains\ReSharperPlatformVs$VisualStudioMajorVersion\v*_$VisualStudioInstanceId$RootSuffix\NuGet.Config").Directory
 
     # Adapt packages.config
     if (Test-Path "$InstallationDirectory\packages.config") {
