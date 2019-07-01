@@ -27,7 +27,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
 
     # Execute installer
     Write-Output "Installing experimental hive"
-    Invoke-Exe $InstallerFile "/VsVersion=15.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
+    Invoke-Exe $InstallerFile "/VsVersion=$VisualStudioMajorVersion.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
 
     $PluginRepository = "$env:LOCALAPPDATA\JetBrains\plugins"
     $InstallationDirectory = $(Get-ChildItem "$env:APPDATA\JetBrains\ReSharperPlatformVs$VisualStudioMajorVersion\v*_$VisualStudioInstanceId$RootSuffix\NuGet.Config").Directory
@@ -55,7 +55,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     Invoke-Exe $NuGetPath install $PluginId -OutputDirectory "$PluginRepository" -Source "$OutputDirectory" -DependencyVersion Ignore
 
     Write-Output "Re-installing experimental hive"
-    Invoke-Exe "$InstallerFile" "/VsVersion=15.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
+    Invoke-Exe "$InstallerFile" "/VsVersion=$VisualStudioMajorVersion.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
 
     # Adapt user project file
     $HostIdentifier = "$($InstallationDirectory.Parent.Name)_$($InstallationDirectory.Name.Split('_')[-1])"
