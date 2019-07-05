@@ -18,7 +18,7 @@ plugins {
 ext {
     repoRoot = projectDir
     isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
-    sdkVersion = "2019.1"
+    sdkVersion = "2019.1" // -SNAPSHOT or -EAPX suffixes possible
     rdLibDirectory = new File(repoRoot, "build/riderRD-$sdkVersion/lib/rd")
     dotNetDir = new File(repoRoot, "src/dotnet")
     dotNetPluginId = "ReSharperPlugin.SamplePlugin"
@@ -26,10 +26,8 @@ ext {
 }
 
 repositories {
-    maven { url 'https://repo.labs.intellij.net/central-proxy' }
-    maven { url 'https://repo.labs.intellij.net/rd-snapshots-maven' }
-//  maven { url 'https://repo.labs.intellij.net/jitpack.io' }
-//  mavenLocal()
+    maven { url 'https://cache-redirector.jetbrains.com/intellij-repository/snapshots' }
+    maven { url 'https://cache-redirector.jetbrains.com/maven-central' }
     flatDir { dirs rdLibDirectory.absolutePath }
 }
 
