@@ -40,9 +40,9 @@ wrapper {
 }
 
 version = ext.PluginVersion
-// TODO if
-intellij.publish.username = ext.username
-intellij.publish.password = ext.password
+
+if (ext.has("username")) intellij.publish.username = ext.username
+if (ext.has("password")) intellij.publish.password = ext.password
 
 sourceSets {
     main {
