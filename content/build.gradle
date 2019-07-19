@@ -23,8 +23,8 @@ ext {
     isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
     rdLibDirectory = new File(repoRoot, "build/riderRD-${ProductVersion}/lib/rd")
     dotNetDir = new File(repoRoot, "src/dotnet")
-    dotNetPluginId = "ReSharperPlugin.SamplePlugin"
-    dotnetSolution = new File(repoRoot, "SamplePlugin.sln")
+    dotNetPluginId = "${PluginNamespace}.${PluginName}"
+    dotnetSolution = new File(repoRoot, "${PluginName}.sln")
 }
 
 repositories {
@@ -121,8 +121,8 @@ apply plugin: 'com.jetbrains.rdgen'
 
 rdgen {
     def modelDir = new File(repoRoot, "protocol/src/main/kotlin/model")
-    def csOutput = new File(repoRoot, "src/dotnet/ReSharperPlugin.SamplePlugin/Rider/Model")
-    def ktOutput = new File(repoRoot, "src/rider/main/kotlin/sampleplugin/model")
+    def csOutput = new File(repoRoot, "src/dotnet/${dotNetPluginId}/Rider/Model")
+    def ktOutput = new File(repoRoot, "src/rider/main/kotlin/${PluginName.toLowerCase()}/model")
 
     verbose = true
     classpath "${rdLibDirectory}/rider-model.jar"
