@@ -34,6 +34,12 @@ gradlew :runIde
 powershell .\runVisualStudio.ps1
 ```
 
+When starting Gradle tasks from inside IntelliJ IDEA, make sure that the Gradle settings are as follows:
+
+<img src="./images/gradle-configuration01.png" width="400" />
+<img src="./images/gradle-configuration02.png" width="400" />
+
+
 If your Rider plugin requires a [model](https://www.jetbrains.com/help/resharper/sdk/Products/Rider.html) to share information between ReSharper backend and IntelliJ frontend, there is a sample protocol defined in `protocol` directory. To generate the Kotlin and C# implementation, call:
 
 ```
