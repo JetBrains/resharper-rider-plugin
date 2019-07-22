@@ -115,6 +115,7 @@ intellij {
     type = 'RD'
     version = "${ProductVersion}"
     downloadSources = false
+    instrumentCode = false
 }
 
 apply plugin: 'com.jetbrains.rdgen'
