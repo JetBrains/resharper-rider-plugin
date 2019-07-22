@@ -62,6 +62,8 @@ There are a couple of version identifiers that should always be updated synchron
 - The `SdkVersion` property in [Plugin.props](https://github.com/matkoch/resharper-sampleplugin/blob/0b8fe5034141b7f731038acd8de3aa793f8bc630/content/src/dotnet/Plugin.props#L3) will affect the referenced `JetBrains.ReSharper.SDK` NuGet package and will also determine the `wave` version that is required for the Extension Manager in ReSharper
 - The `runVisualStudio.ps1` script will always download the latest available installer for ReSharper - this can be either a normal release or early-access-program (EAP) release
 
+Available versions are listed here for [ReSharper](https://www.nuget.org/packages/JetBrains.ReSharper.SDK) and [Rider](https://www.jetbrains.com/intellij-repository/snapshots) (under `com.jetbrains.intellij.rider`).
+
 ## Deployment
 
 Both plugins can be published by calling:
