@@ -4,6 +4,10 @@
 
 This repository defines a template for easy development of ReSharper and Rider plugins according to the official documentation for the [ReSharper SDK](https://www.jetbrains.com/help/resharper/sdk/README.html) and [IntelliJ SDK](http://www.jetbrains.org/intellij/sdk/docs/welcome.html).
 
+## Prerequisites
+
+When developing for Rider, [Java 11 Amazon Corretto](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) should be installed.
+
 ## Getting Started
 
 Download the `JetBrains.ReSharper.SamplePlugin.*.nupkg` template package from the [releases page](https://github.com/matkoch/resharper-sampleplugin/releases) and invoke from the download directory:
