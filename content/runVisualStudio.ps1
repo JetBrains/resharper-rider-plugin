@@ -1,4 +1,5 @@
 Param(
+    $RootSuffix = "SamplePlugin",
     $Version = "1337.0.0"
 )
 
