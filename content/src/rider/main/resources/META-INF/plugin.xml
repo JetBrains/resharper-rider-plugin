@@ -11,15 +11,17 @@
 <p>Sample description</p>
 ]]>
   </description>
+<!--#if (include-samples) -->
 
   <extensions defaultExtensionNs="com.intellij">
     <applicationConfigurable groupId="language" instance="com.jetbrains.rider.plugins.sampleplugin.SampleOptionsPage" id="SampleOptionsPage" />
   </extensions>
-  
+
   <actions>
     <action id="SampleAction" class="com.jetbrains.rider.plugins.sampleplugin.SampleAction"
             text="Do Something" description="Do Something Description">
     </action>
   </actions>
+<!--#endif -->
   
 </idea-plugin>

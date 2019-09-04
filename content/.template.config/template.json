@@ -12,5 +12,34 @@
     "sourceName": "SamplePlugin",
     "preferNameDirectory" : "true",
     "primaryOutputs": [
+    ],
+    "symbols": {
+        "include-samples":{
+            "type": "parameter",
+            "dataType":"bool",
+            "defaultValue": "false"
+        }
+    },
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "condition": "(!include-samples)",
+                    "exclude": [
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleAction.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleComponent.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleFix.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleHighlighting.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleProblemAnalyzer.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleSettings.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/Options/SampleOptionsPage.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin/Options/ZoneMarker.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/SampleHighlightingTest.cs",
+                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleAction.kt",
+                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleOptionsPage.kt"
+                    ]
+                }
+            ]
+        }
     ]
 }
