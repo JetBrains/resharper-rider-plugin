@@ -13,6 +13,6 @@ $ErrorActionPreference = "Stop"
 
 $ChangelogText = ([Regex]::Matches([System.IO.File]::ReadAllText("CHANGELOG.md"), '(?s)(##.+?.+?)(?=##|$)').Captures | Select -First 10) -Join ''
 
-Invoke-Exe $MSBuildPath "/t:Restore;Rebuild;Pack" "$SolutionPath" "/v:minimal" "/p:Configuration=$Configuration" "/p:PackageOutputPath=$OutputDirectory" "/p:PackageVersion=$Version" "/p:PackageReleaseNotes=`"$ChangelogText`""
+Invoke-Exe dotnet msbuild "/t:Restore;Rebuild;Pack" "$SolutionPath" "/p:Configuration=$Configuration" "/p:PackageOutputPath=$OutputDirectory" "/p:PackageVersion=$Version" "/p:PackageReleaseNotes=`"$ChangelogText`""
 $PackageFile = "$OutputDirectory\$PluginId.$Version*.nupkg"
 Invoke-Exe $NuGetPath push $PackageFile -Source "https://resharper-plugins.jetbrains.com/api/v2/package" -ApiKey $ApiKey
