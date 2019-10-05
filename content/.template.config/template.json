@@ -18,11 +18,41 @@
             "type": "parameter",
             "dataType":"bool",
             "defaultValue": "false"
+        },
+        "resharper-only":{
+            "type": "parameter",
+            "dataType":"bool",
+            "defaultValue": "false"
         }
     },
     "sources": [
         {
             "modifiers": [
+                {
+                    "condition": "(resharper-only)",
+                    "exclude": [
+                        ".idea/**/rdgen__*.xml",
+                        ".idea/**/Rider__*.xml",
+                        ".idea/**/Generate_Protocol.xml",
+                        ".idea/**/Rider.xml",
+                        "gradle/**/*",
+                        "protocol/**/*",
+                        "src/rider/**/*",
+                        "build.gradle",
+                        "gradle.properties",
+                        "gradlew",
+                        "gradlew.bat",
+                        "settings.gradle"
+                    ]
+                },
+                {
+                    "condition": "(!include-samples || resharper-only)",
+                    "exclude": [
+                        "protocol/src/main/kotlin/model/rider/SamplePluginModel.kt",
+                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleAction.kt",
+                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleOptionsPage.kt"
+                    ]
+                },
                 {
                     "condition": "(!include-samples)",
                     "exclude": [
@@ -34,9 +64,7 @@
                         "src/dotnet/ReSharperPlugin.SamplePlugin/SampleSettings.cs",
                         "src/dotnet/ReSharperPlugin.SamplePlugin/Options/SampleOptionsPage.cs",
                         "src/dotnet/ReSharperPlugin.SamplePlugin/Options/ZoneMarker.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/SampleHighlightingTest.cs",
-                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleAction.kt",
-                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleOptionsPage.kt"
+                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/SampleHighlightingTest.cs"
                     ]
                 }
             ]
