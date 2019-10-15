@@ -14,15 +14,24 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     # Determine download link
     $ReleaseUrl = "https://data.services.jetbrains.com/products/releases?code=RSU&type=eap&type=release"
     $DownloadLink = [uri] $(Invoke-WebRequest -UseBasicParsing $ReleaseUrl | ConvertFrom-Json).RSU[0].downloads.windows.link
+    
+    # Calculate version
+    $VersionSplit = $DownloadLink.Segments[-1].Split(".")
+    $VersionMajor = $VersionSplit[2]
+    $VersionMinor = $VersionSplit[3]
+    if ($VersionSplit.Count -eq 5)              { $SdkVersion = "$($VersionMajor).$($VersionMinor).0" }
+    elseif ($VersionSplit[4].StartsWith("EAP")) { $SdkVersion = "$($VersionMajor).$($VersionMinor).0-*" }
+    else                                        { $SdkVersion = "$($VersionMajor).$($VersionMinor).$($VersionSplit[4])" }
+    $SdkVersionShort = "$($VersionMajor[2])$($VersionMajor[3])$($VersionMinor)"
 
     # Download installer
     $InstallerFile = "$PSScriptRoot\build\installer\$($DownloadLink.Segments[-1])"
     if (!(Test-Path $InstallerFile)) {
         mkdir -Force $(Split-Path $InstallerFile -Parent) > $null
-        Write-Output "Downloading from $DownloadLink"
+        Write-Output "Downloading $SdkVersion installer from $DownloadLink"
         (New-Object System.Net.WebClient).DownloadFile($DownloadLink, $InstallerFile)
     } else {
-        Write-Output "Using $($DownloadLink.segments[-1]) from cache"
+        Write-Output "Using cached installer from $InstallerFile"
     }
 
     # Execute installer
@@ -30,7 +39,10 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     Invoke-Exe $InstallerFile "/VsVersion=$VisualStudioMajorVersion.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
 
     $PluginRepository = "$env:LOCALAPPDATA\JetBrains\plugins"
-    $InstallationDirectory = $(Get-ChildItem "$env:APPDATA\JetBrains\ReSharperPlatformVs$VisualStudioMajorVersion\v*_$VisualStudioInstanceId$RootSuffix\NuGet.Config").Directory
+    $Installations = @(Get-ChildItem "$env:APPDATA\JetBrains\ReSharperPlatformVs$VisualStudioMajorVersion\v$($SdkVersionShort)_$VisualStudioInstanceId$RootSuffix\NuGet.Config")
+    if ($Installations.Count -ne 1) { Write-Error "Found no or multiple installation directories: $Installations" }
+    $InstallationDirectory = $Installations.Directory
+    Write-Host "Found installation directory at $InstallationDirectory"
 
     # Adapt packages.config
     if (Test-Path "$InstallationDirectory\packages.config") {
@@ -68,17 +80,9 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     $ProjectXml.Save("$UserProjectXmlFile")
 
     # Update Plugin.props
-    $VersionSplit = $DownloadLink.Segments[-1].Split(".")
     $PluginPropsFile = "$SourceBasePath\Plugin.props"
     $PluginPropsXml = [xml] (Get-Content "$PluginPropsFile")
     $SdkVersionNode = $PluginPropsXml.SelectSingleNode(".//SdkVersion")
-    if ($VersionSplit.Count -eq 5){
-        $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).0"
-    } elseif ($VersionSplit[4].StartsWith("EAP")) {
-        $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).0-*"
-    } else {
-        $SdkVersion = "$($VersionSplit[2]).$($VersionSplit[3]).$($VersionSplit[4])"
-    }
     $SdkVersionNode.InnerText = $SdkVersion
     $PluginPropsXml.Save("$PluginPropsFile")
 } else {
