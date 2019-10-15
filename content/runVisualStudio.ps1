@@ -1,6 +1,6 @@
 Param(
     $RootSuffix = "SamplePlugin",
-    $Version = "1337.0.0"
+    $Version = "1.0.0"
 )
 
 Set-StrictMode -Version Latest
