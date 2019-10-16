@@ -11,6 +11,9 @@ $ErrorActionPreference = "Stop"
 $UserProjectXmlFile = "$SourceBasePath\$PluginId\$PluginId.csproj.user"
 
 if (!(Test-Path "$UserProjectXmlFile")) {
+    # Get SDK version from Plugin.props file
+    # https://data.services.jetbrains.com/products/releases?code=RSU&type=eap&type=release&majorVersion=2019.2
+        
     # Determine download link
     $ReleaseUrl = "https://data.services.jetbrains.com/products/releases?code=RSU&type=eap&type=release"
     $DownloadLink = [uri] $(Invoke-WebRequest -UseBasicParsing $ReleaseUrl | ConvertFrom-Json).RSU[0].downloads.windows.link
@@ -90,4 +93,4 @@ if (!(Test-Path "$UserProjectXmlFile")) {
 }
 
 Invoke-Exe $MSBuildPath "/t:Restore;Rebuild" "$SolutionPath" "/v:minimal"
-Invoke-Exe $DevEnvPath "/rootSuffix $RootSuffix" "/ReSharper.Internal"
+Invoke-Exe $DevEnvPath "/rootSuffix $RootSuffix" "/ReSharper.Internal" "/ReSharper.LogFile ReSharper.log" "/ReSharper.LogLevel Trace"
