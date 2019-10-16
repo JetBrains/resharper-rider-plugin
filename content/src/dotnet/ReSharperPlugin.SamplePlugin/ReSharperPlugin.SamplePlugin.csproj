@@ -27,9 +27,10 @@
     <EmbeddedResource Remove="Rider\**\*" />
     <Content Remove="Rider\**\*" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <Content Include="bin\ReSharperPlugin.SamplePlugin\$(Configuration)\ReSharperPlugin.SamplePlugin.*" PackagePath="dotFiles" Pack="true" />
+    <Content Include="bin\$(AssemblyName)\$(Configuration)\$(AssemblyName).dll" PackagePath="dotFiles" Pack="true" />
+    <Content Include="bin\$(AssemblyName)\$(Configuration)\$(AssemblyName).pdb" PackagePath="dotFiles" Pack="true" />
   </ItemGroup>
   
   <!-- TODO: uncomment for xaml icons -->
