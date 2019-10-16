@@ -19,10 +19,10 @@ dotnet new --install JetBrains.ReSharper.SamplePlugin --nuget-source ./
 Afterwards, a new project can be created from the installed template. The `name` identifier should be letters-only:
 
 ```
-dotnet new resharper-rider-plugin --name MyAwesomePlugin
+dotnet new resharper-rider-plugin --name MyAwesomePlugin [--include-samples] [--resharper-only]
 ```
 
-This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`. Metadata including project website, description, author and others should be entered in `Plugin.props` and `plugins.xml`.
+This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`. Passing `--include-samples` will include a set of sample implementations for actions, code inspections, option pages, and more. Passing `--resharper-only` will exclude all Rider related files. Metadata including project website, description, author and others should be entered in `Plugin.props` and `plugins.xml`.
 
 :warning: _The only place that currently needs to be updated manually is the `RIDER_PLUGIN_ID` in `README.md`, which you'll only get after uploading your Rider plugin the first time._
 
@@ -50,7 +50,7 @@ If your Rider plugin requires a [model](https://www.jetbrains.com/help/resharper
 gradlew :rdgen
 ```
 
-Opening the solution in Rider will automatically get you the corresponding [run configurations](https://www.jetbrains.com/help/rider/Creating_and_Editing_Run_Debug_Configurations.html):
+Opening the solution in Rider or IntelliJ IDEA will automatically provide the corresponding [run configurations](https://www.jetbrains.com/help/rider/Creating_and_Editing_Run_Debug_Configurations.html):
 
 <img src="./images/run-configurations.png" width="400" />
 
