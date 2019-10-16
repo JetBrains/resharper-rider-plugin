@@ -1,3 +1,7 @@
+Param(
+    $Version = "1.0.0"
+)
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
