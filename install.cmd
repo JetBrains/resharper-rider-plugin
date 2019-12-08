@@ -1,2 +1,2 @@
-dotnet new --uninstall %cd%\content
-dotnet new --install %cd%\content
+dotnet new --uninstall $PWD/content
+dotnet new --install $PWD/content

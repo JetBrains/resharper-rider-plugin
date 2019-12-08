@@ -1,2 +1,2 @@
 git clean -fdx
-%cd%\content\tools\nuget.exe pack %cd%\JetBrains.ReSharper.SamplePlugin.nuspec -NoPackageAnalysis
+mono $PWD/content/tools/nuget.exe pack $PWD/JetBrains.ReSharper.SamplePlugin.nuspec -NoPackageAnalysis

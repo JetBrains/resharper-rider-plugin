@@ -1,2 +1,2 @@
-call install.cmd
-dotnet new resharper-rider-plugin --force --name %*
+./install.cmd
+dotnet new resharper-rider-plugin --force --name "$@"
