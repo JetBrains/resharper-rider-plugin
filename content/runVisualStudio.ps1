@@ -18,13 +18,13 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     $VersionSplit = $SdkVersionNode.InnerText.Split(".")
     $MajorVersion = "$($VersionSplit[0]).$($VersionSplit[1])"
     $MajorVersionShort = "$($MajorVersion[2])$($MajorVersion[3])$($MajorVersion[5])"
-        
+
     # Determine download link
     $ReleaseUrl = "https://data.services.jetbrains.com/products/releases?code=RSU&type=eap&type=release&majorVersion=$MajorVersion"
     $VersionEntry = $(Invoke-WebRequest -UseBasicParsing $ReleaseUrl | ConvertFrom-Json).RSU[0]
     ## TODO: check versions
     $DownloadLink = [uri] $VersionEntry.downloads.windows.link
-    
+
     # Download installer
     $InstallerFile = "$PSScriptRoot\build\installer\$($DownloadLink.Segments[-1])"
     if (!(Test-Path $InstallerFile)) {
@@ -72,7 +72,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
 
     # Adapt user project file
     $HostIdentifier = "$($InstallationDirectory.Parent.Name)_$($InstallationDirectory.Name.Split('_')[-1])"
-    
+
     Set-Content -Path "$UserProjectXmlFile" -Value "<Project><PropertyGroup><HostFullIdentifier></HostFullIdentifier></PropertyGroup></Project>"
 
     $ProjectXml = [xml] (Get-Content "$UserProjectXmlFile")
