@@ -1,14 +1,14 @@
 <Project>
   <PropertyGroup>
-    <SdkVersion>2019.2.0-*</SdkVersion>
-    
+    <SdkVersion>2019.3.0</SdkVersion>
+
     <Title>SamplePlugin</Title>
     <Description>Description</Description>
-  
+
     <Authors>Author</Authors>
     <Copyright>Copyright $([System.DateTime]::Now.Year) Maintainers of SamplePlugin</Copyright>
     <PackageTags>resharper plugin</PackageTags>
-  
+
     <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageIconUrl></PackageIconUrl>

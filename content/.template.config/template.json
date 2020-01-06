@@ -6,7 +6,7 @@
     "shortName": "resharper-rider-plugin",
     "tags": {
         "type": "project",
-        "language": "C#",     
+        "language": "C#",
         "platform": ".NET"
     },
     "sourceName": "SamplePlugin",
@@ -23,6 +23,12 @@
             "type": "parameter",
             "dataType":"bool",
             "defaultValue": "false"
+        },
+        "version":{
+            "type": "parameter",
+            "dataType":"string",
+            "defaultValue": "2019.3",
+            "replaces":"2019.3"
         }
     },
     "sources": [
