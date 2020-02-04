@@ -20,13 +20,14 @@ plugins {
 
 ext {
     isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
-    rdLibDirectory = new File(rootDir, "build/riderRD-${ProductVersion}/lib/rd")
+    rdLibDirectory = {
+        new File(intellij.ideaDependency.classes, "lib/rd")
+    }
 }
 
 repositories {
     maven { url 'https://cache-redirector.jetbrains.com/intellij-repository/snapshots' }
     maven { url 'https://cache-redirector.jetbrains.com/maven-central' }
-    flatDir { dirs rdLibDirectory.absolutePath }
 }
 
 wrapper {
@@ -97,7 +98,9 @@ rdgen {
     def ktOutput = new File(rootDir, "src/rider/main/kotlin/com/jetbrains/rider/plugins/${RiderPluginId.replace('.','/').toLowerCase()}")
 
     verbose = true
-    classpath "${rdLibDirectory}/rider-model.jar"
+    classpath {
+        "${rdLibDirectory()}/rider-model.jar"
+    }
     sources "${modelDir}/rider"
     hashFolder = "${buildDir}"
     packages = "model.rider"
