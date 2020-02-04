@@ -27,8 +27,8 @@
         "version":{
             "type": "parameter",
             "dataType":"string",
-            "defaultValue": "2019.3",
-            "replaces":"2019.3"
+            "defaultValue": "2019.3.1",
+            "replaces":"2019.3.1"
         }
     },
     "sources": [
