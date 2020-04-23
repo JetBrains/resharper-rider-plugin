@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SdkVersion>2019.3.1</SdkVersion>
+    <SdkVersion>2020.1.0</SdkVersion>
 
     <Title>SamplePlugin</Title>
     <Description>Description</Description>
