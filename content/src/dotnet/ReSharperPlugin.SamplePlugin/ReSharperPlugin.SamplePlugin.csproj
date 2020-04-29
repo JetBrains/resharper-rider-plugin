@@ -18,7 +18,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <!-- TODO: https://github.com/NuGet/Home/issues/7154 -->
-    <PackageReference Include="Wave" Version="$(WaveVersion)" />
+    <PackageReference Include="Wave" Version="[$(WaveVersion)]" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +33,7 @@
     <Content Include="bin\$(AssemblyName)\$(Configuration)\$(AssemblyName).pdb" PackagePath="dotFiles" Pack="true" />
   </ItemGroup>
 
+  <!-- WARNING: ReSharper plugins with icons must be compiled using PowerShell scripts -->
   <!-- TODO: uncomment for xaml icons -->
   <!--<ItemGroup>-->
     <!--<Reference Include="System.Xaml" />-->
