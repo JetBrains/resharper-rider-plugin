@@ -39,7 +39,6 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     Write-Output "Installing experimental hive"
     Invoke-Exe $InstallerFile "/VsVersion=$VisualStudioMajorVersion.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
 
-    $PluginRepository = "$env:LOCALAPPDATA\JetBrains\plugins"
     $Installations = @(Get-ChildItem "$env:APPDATA\JetBrains\ReSharperPlatformVs$VisualStudioMajorVersion\v$($MajorVersionShort)_$VisualStudioInstanceId$RootSuffix\NuGet.Config")
     if ($Installations.Count -ne 1) { Write-Error "Found no or multiple installation directories: $Installations" }
     $InstallationDirectory = $Installations.Directory
@@ -63,13 +62,6 @@ if (!(Test-Path "$UserProjectXmlFile")) {
         $PackagesXml.Save("$InstallationDirectory\packages.config")
     }
 
-    # Install plugin
-    Invoke-Exe $MSBuildPath "/t:Restore;Rebuild;Pack" "$SolutionPath" "/v:minimal" "/p:PackageVersion=$Version" "/p:PackageOutputPath=`"$OutputDirectory`""
-    Invoke-Exe $NuGetPath install $PluginId -OutputDirectory "$PluginRepository" -Source "$OutputDirectory" -DependencyVersion Ignore
-
-    Write-Output "Re-installing experimental hive"
-    Invoke-Exe "$InstallerFile" "/VsVersion=$VisualStudioMajorVersion.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
-
     # Adapt user project file
     $HostIdentifier = "$($InstallationDirectory.Parent.Name)_$($InstallationDirectory.Name.Split('_')[-1])"
 
@@ -79,6 +71,15 @@ if (!(Test-Path "$UserProjectXmlFile")) {
     $HostIdentifierNode = $ProjectXml.SelectSingleNode(".//HostFullIdentifier")
     $HostIdentifierNode.InnerText = $HostIdentifier
     $ProjectXml.Save("$UserProjectXmlFile")
+
+    # Install plugin
+    $PluginRepository = "$env:LOCALAPPDATA\JetBrains\plugins"
+    Remove-Item "$PluginRepository\${PluginId}.${Version}" -Recurse
+    Invoke-Exe $MSBuildPath "/t:Restore;Rebuild;Pack" "$SolutionPath" "/v:minimal" "/p:PackageVersion=$Version" "/p:PackageOutputPath=`"$OutputDirectory`""
+    Invoke-Exe $NuGetPath install $PluginId -OutputDirectory "$PluginRepository" -Source "$OutputDirectory" -DependencyVersion Ignore
+
+    Write-Output "Re-installing experimental hive"
+    Invoke-Exe "$InstallerFile" "/VsVersion=$VisualStudioMajorVersion.0" "/SpecificProductNames=ReSharper" "/Hive=$RootSuffix" "/Silent=True"
 } else {
     Write-Warning "Plugin is already installed. To trigger reinstall, delete $UserProjectXmlFile."
 }
