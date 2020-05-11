@@ -10,7 +10,7 @@ When developing for Rider, [Java 11 Amazon Corretto](https://docs.aws.amazon.com
 
 ## Getting Started
 
-Download the `JetBrains.ReSharper.SamplePlugin.*.nupkg` template package from the [releases page](https://github.com/matkoch/resharper-sampleplugin/releases) and invoke from the download directory:
+Download the `JetBrains.ReSharper.SamplePlugin.*.nupkg` template package from the [releases page](https://github.com/JetBrains/resharper-rider-plugin/releases) and invoke from the download directory:
 
 ```
 dotnet new --install JetBrains.ReSharper.SamplePlugin --nuget-source ./
@@ -63,6 +63,16 @@ There are a couple of version identifiers that should always be updated synchron
 - The `runVisualStudio.ps1` script will always download the latest available installer for ReSharper - this can be either a normal release or early-access-program (EAP) release
 
 Available versions are listed here for [ReSharper](https://www.nuget.org/packages/JetBrains.ReSharper.SDK) and [Rider](https://www.jetbrains.com/intellij-repository/snapshots) (under `com.jetbrains.intellij.rider`).
+
+### Visual Studio / ReSharper Relevant Directories
+
+Installing ReSharper and the plugin into an experimental Visual Studio instance (hive) affects the following directories:
+
+- `%LOCALAPPDATA%/JetBrains/plugins` contains a copy of the plugin package, similar to the global NuGet package cache
+- `%LOCALAPPDATA%/JetBrains/Installations` contains settings directories per experimental instance, whereas `packages.config` defines what plugins should be installed
+- `%APPDATA%/JetBrains/ReSharperPlatformVs[version]` contains binary directories per experimental instance with all assemblies to run ReSharper and the plugin
+
+Using [attached folders](https://www.jetbrains.com/help/rider/Extending_Your_Solution.html#adding-external-files-and-folders) can be of great help to track these directories while developing a ReSharper plugin. 
 
 ## Deployment
 
