@@ -6,6 +6,8 @@ Param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+Set-Location $PSScriptRoot
+
 . ".\settings.ps1"
 
 $UserProjectXmlFile = "$SourceBasePath\$PluginId\$PluginId.csproj.user"
