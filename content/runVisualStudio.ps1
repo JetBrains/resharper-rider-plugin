@@ -87,4 +87,4 @@ if (!(Test-Path "$UserProjectXmlFile")) {
 }
 
 Invoke-Exe $MSBuildPath "/t:Restore;Rebuild" "$SolutionPath" "/v:minimal"
-Invoke-Exe $DevEnvPath "/rootSuffix $RootSuffix" "/ReSharper.Internal" "/ReSharper.LogFile ReSharper.log" "/ReSharper.LogLevel Trace"
+Invoke-Exe $DevEnvPath "/rootSuffix $RootSuffix" "/ReSharper.Internal" "/ReSharper.LogFile $PSScriptRoot\ReSharper.log" "/ReSharper.LogLevel Trace"
