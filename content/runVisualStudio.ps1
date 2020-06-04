@@ -74,7 +74,7 @@ if (!(Test-Path "$UserProjectXmlFile")) {
 
     # Install plugin
     $PluginRepository = "$env:LOCALAPPDATA\JetBrains\plugins"
-    Remove-Item "$PluginRepository\${PluginId}.${Version}" -Recurse
+    Remove-Item "$PluginRepository\${PluginId}.${Version}" -Recurse -ErrorAction Ignore
     Invoke-Exe $MSBuildPath "/t:Restore;Rebuild;Pack" "$SolutionPath" "/v:minimal" "/p:PackageVersion=$Version" "/p:PackageOutputPath=`"$OutputDirectory`""
     Invoke-Exe $NuGetPath install $PluginId -OutputDirectory "$PluginRepository" -Source "$OutputDirectory" -DependencyVersion Ignore
 
