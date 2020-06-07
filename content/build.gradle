@@ -56,7 +56,7 @@ task compileDotNet {
     doLast {
         exec {
             executable "dotnet"
-            args "msbuild","/t:Restore;Rebuild","${DotnetSolution}","/p:Configuration=${BuildConfiguration}"
+            args "msbuild","/t:Restore;Rebuild","${DotnetSolution}","/p:Configuration=${BuildConfiguration}","/p:HostFullIdentifier="
             workingDir rootDir
         }
     }
@@ -78,7 +78,7 @@ buildPlugin {
 
         exec {
             executable "dotnet"
-            args "msbuild","/t:Pack","${DotnetSolution}","/p:Configuration=${BuildConfiguration}","/p:PackageOutputPath=${rootDir}/output","/p:PackageReleaseNotes=${changeNotes}","/p:PackageVersion=${version}"
+            args "msbuild","/t:Pack","${DotnetSolution}","/p:Configuration=${BuildConfiguration}","/p:HostFullIdentifier=","/p:PackageOutputPath=${rootDir}/output","/p:PackageReleaseNotes=${changeNotes}","/p:PackageVersion=${version}"
         }
     }
 }
