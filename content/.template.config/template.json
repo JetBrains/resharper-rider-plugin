@@ -70,7 +70,10 @@
                         "src/dotnet/ReSharperPlugin.SamplePlugin/SampleSettings.cs",
                         "src/dotnet/ReSharperPlugin.SamplePlugin/Options/SampleOptionsPage.cs",
                         "src/dotnet/ReSharperPlugin.SamplePlugin/Options/ZoneMarker.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/SampleHighlightingTest.cs"
+                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/SampleHighlightingTest.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/test/data/nuget.config",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/test/data/CSharp/SampleTest.cs",
+                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/test/data/CSharp/SampleTest.cs.gold"
                     ]
                 }
             ]
