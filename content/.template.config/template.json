@@ -19,6 +19,11 @@
             "dataType":"bool",
             "defaultValue": "false"
         },
+        "build-only":{
+            "type": "parameter",
+            "dataType":"bool",
+            "defaultValue": "false"
+        },
         "resharper-only":{
             "type": "parameter",
             "dataType":"bool",
@@ -37,10 +42,7 @@
                 {
                     "condition": "(resharper-only)",
                     "exclude": [
-                        ".idea/**/rdgen__*.xml",
-                        ".idea/**/Rider__*.xml",
-                        ".idea/**/Generate_Protocol.xml",
-                        ".idea/**/Rider.xml",
+                        ".idea/**/*",
                         "gradle/**/*",
                         "protocol/**/*",
                         "src/rider/**/*",
@@ -52,28 +54,27 @@
                     ]
                 },
                 {
-                    "condition": "(!include-samples || resharper-only)",
+                    "condition": "(!include-samples || resharper-only || build-only)",
+                    "exclude": [ "**/*.kt" ]
+                },
+                {
+                    "condition": "(!include-samples || build-only)",
                     "exclude": [
-                        "protocol/src/main/kotlin/model/rider/SamplePluginModel.kt",
-                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleAction.kt",
-                        "src/rider/main/kotlin/com/jetbrains/rider/plugins/sampleplugin/SampleOptionsPage.kt"
+                        "src/dotnet/**/*.cs",
+                        "src/dotnet/**/*.gold"
                     ]
                 },
                 {
-                    "condition": "(!include-samples)",
+                    "condition": "(build-only)",
                     "exclude": [
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleAction.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleComponent.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleFix.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleHighlighting.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleProblemAnalyzer.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/SampleSettings.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/Options/SampleOptionsPage.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin/Options/ZoneMarker.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/SampleHighlightingTest.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/test/data/nuget.config",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/test/data/CSharp/SampleTest.cs",
-                        "src/dotnet/ReSharperPlugin.SamplePlugin.Tests/test/data/CSharp/SampleTest.cs.gold"
+                        ".gitattributes",
+                        ".gitignore",
+                        "CHANGELOG.md",
+                        "README.md",
+                        "SamplePlugin.sln",
+                        "src/dotnet/**/*.csproj",
+                        "src/dotnet/Plugin.props",
+                        "src/rider/main/resources/META-INF/plugin.xml"
                     ]
                 }
             ]
