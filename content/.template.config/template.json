@@ -46,7 +46,8 @@
                 {
                     "condition": "(resharper-only)",
                     "exclude": [
-                        ".idea/**/*",
+                        ".idea/**/Rider*.xml",
+                        ".idea/**/rdgen*.xml",
                         "gradle/**/*",
                         "protocol/**/*",
                         "src/rider/**/*",
