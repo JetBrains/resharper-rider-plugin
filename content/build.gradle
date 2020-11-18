@@ -159,6 +159,8 @@ prepareSandbox {
 }
 
 publishPlugin {
+    dependsOn buildPlugin
+
     token = "${PublishToken}"
 
     doLast {
