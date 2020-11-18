@@ -62,7 +62,7 @@
                     "exclude": [ "**/*.kt" ]
                 },
                 {
-                    "condition": "(!include-samples || build-only)",
+                    "condition": "(!include-samples)",
                     "exclude": [
                         "src/dotnet/**/*.cs",
                         "src/dotnet/**/*.gold"
@@ -76,7 +76,7 @@
                         "CHANGELOG.md",
                         "README.md",
                         "SamplePlugin.sln",
-                        "src/dotnet/**/*.csproj",
+                        "src/dotnet/*/**/*",
                         "src/dotnet/Plugin.props",
                         "src/rider/main/resources/META-INF/plugin.xml"
                     ]
