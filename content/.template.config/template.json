@@ -1,4 +1,5 @@
 {
+    "$schema": "http://json.schemastore.org/template",
     "author": "Matthias Koch",
     "classifications": [ "jetbrains", "resharper", "rider" ],
     "name": "ReSharper/Rider Plugin",
@@ -17,17 +18,20 @@
         "include-samples":{
             "type": "parameter",
             "dataType":"bool",
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "description": "Emit sample code for highlights, quick-fixes, actions, and more."
         },
         "build-only":{
             "type": "parameter",
             "dataType":"bool",
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "description": "Only emit files related to build infrastructure."
         },
         "resharper-only":{
             "type": "parameter",
             "dataType":"bool",
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "description": "Only emit files relevant for ReSharper plugins (no Rider)."
         },
         "version":{
             "type": "parameter",
