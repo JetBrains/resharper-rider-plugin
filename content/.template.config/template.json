@@ -36,8 +36,8 @@
         "version":{
             "type": "parameter",
             "dataType":"string",
-            "defaultValue": "2020.1",
-            "replaces":"2020.1"
+            "defaultValue": "2020.2",
+            "replaces":"2020.2"
         }
     },
     "sources": [
