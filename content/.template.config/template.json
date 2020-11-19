@@ -66,7 +66,8 @@
                     "condition": "(!include-samples)",
                     "exclude": [
                         "src/dotnet/**/*.cs",
-                        "src/dotnet/**/*.gold"
+                        "src/dotnet/**/*.gold",
+                        "src/dotnet/**/*.DotSettings"
                     ]
                 },
                 {
