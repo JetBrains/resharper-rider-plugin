@@ -19,12 +19,14 @@
     <PackageReference Include="Wave" Version="[$(WaveVersion)]" />
   </ItemGroup>
 
+<!--#if (resharper-only) -->
   <ItemGroup>
     <Compile Remove="Rider\**\*" />
     <None Remove="Rider\**\*" />
     <EmbeddedResource Remove="Rider\**\*" />
     <Content Remove="Rider\**\*" />
   </ItemGroup>
+<!--#endif -->
 
   <ItemGroup>
     <Content Include="bin\$(AssemblyName)\$(Configuration)\$(AssemblyName).dll" PackagePath="dotFiles" Pack="true" />

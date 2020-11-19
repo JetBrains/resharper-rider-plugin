@@ -50,6 +50,7 @@
                         ".idea/**/rdgen*.xml",
                         "gradle/**/*",
                         "protocol/**/*",
+                        "src/dotnet/**/*.Rider.csproj",
                         "src/rider/**/*",
                         "build.gradle",
                         "gradle.properties",
