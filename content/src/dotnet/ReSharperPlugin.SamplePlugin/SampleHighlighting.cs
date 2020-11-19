@@ -6,16 +6,15 @@ using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Util;
 using ReSharperPlugin.SamplePlugin;
 
-[assembly: RegisterConfigurableSeverity(
-    SampleHighlighting.SeverityId,
-    CompoundItemName: null,
-    Group: HighlightingGroupIds.CodeSmell,
-    Title: SampleHighlighting.Message,
-    Description: SampleHighlighting.Description,
-    DefaultSeverity: Severity.WARNING)]
-
 namespace ReSharperPlugin.SamplePlugin
 {
+    [RegisterConfigurableSeverity(
+        SampleHighlighting.SeverityId,
+        CompoundItemName: null,
+        Group: HighlightingGroupIds.CodeSmell,
+        Title: SampleHighlighting.Message,
+        Description: SampleHighlighting.Description,
+        DefaultSeverity: Severity.WARNING)]
     [ConfigurableSeverityHighlighting(
         SeverityId,
         CSharpLanguage.Name,
@@ -25,8 +24,8 @@ namespace ReSharperPlugin.SamplePlugin
     public class SampleHighlighting : IHighlighting
     {
         public const string SeverityId = nameof(SampleHighlighting);
-        public const string Message = "Sample highlighting message";
-        public const string Description = "Sample highlighting description";
+        public const string Message = nameof(SampleHighlighting) + " message";
+        public const string Description = nameof(SampleHighlighting) + " description";
         
         public SampleHighlighting(ICSharpDeclaration declaration)
         {
