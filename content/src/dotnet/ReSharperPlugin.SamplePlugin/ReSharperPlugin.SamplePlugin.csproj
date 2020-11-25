@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.ReSharper.SDK" Version="$(SdkVersion)" PrivateAssets="all" />
     <!-- TODO: https://github.com/NuGet/Home/issues/7154 -->
-    <PackageReference Include="Wave" Version="[$(WaveVersion)]" />
+    <PackageReference Include="Wave" Version="[$(WaveVersion),$(UpperWaveVersion))" />
   </ItemGroup>
 
 <!--#if (resharper-only) -->
