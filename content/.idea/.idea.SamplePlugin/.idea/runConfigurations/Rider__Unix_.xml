@@ -8,8 +8,6 @@
     <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
     <option name="INTERPRETER_PATH" value="/bin/bash" />
     <option name="INTERPRETER_OPTIONS" value="" />
-    <method v="2">
-      <option name="Build Solution" enabled="true" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>
