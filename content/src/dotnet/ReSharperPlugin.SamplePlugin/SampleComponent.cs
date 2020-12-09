@@ -10,6 +10,7 @@ namespace ReSharperPlugin.SamplePlugin
     {
         public SampleQuickFixRegistrarComponent(IQuickFixes table)
         {
+            // This connects an inspection with an actual quick-fix
             table.RegisterQuickFix<SampleHighlighting>(
                 Lifetime.Eternal,
                 h => new SampleFix(h.Declaration),

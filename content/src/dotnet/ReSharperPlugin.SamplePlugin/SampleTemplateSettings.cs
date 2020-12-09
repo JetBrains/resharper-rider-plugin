@@ -1,7 +1,3 @@
-// Copyright 2019 Maintainers of NUKE.
-// Distributed under the MIT License.
-// https://github.com/nuke-build/resharper/blob/master/LICENSE
-
 using System;
 using System.IO;
 using System.Linq;
@@ -12,6 +8,7 @@ using JetBrains.Lifetimes;
 
 namespace ReSharperPlugin.SamplePlugin
 {
+    // Templates (or settings in general) that ship with the plugin
     [ShellComponent]
     public class SampleTemplateSettings : IHaveDefaultSettingsStream
     {

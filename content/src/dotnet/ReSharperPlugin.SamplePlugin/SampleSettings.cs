@@ -3,6 +3,7 @@ using JetBrains.Application.Settings.WellKnownRootKeys;
 
 namespace ReSharperPlugin.SamplePlugin
 {
+    // Settings that can persist in dotSettings files
     [SettingsKey(
         typeof(EnvironmentSettings),
 //        typeof(CodeEditingSettings),
