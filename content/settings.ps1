@@ -1,5 +1,5 @@
 $PluginId = "ReSharperPlugin.SamplePlugin"
-$SolutionPath = "$PSScriptRoot\SamplePlugin.sln"
+$SolutionPath = "$PSScriptRoot\ReSharperPlugin.SamplePlugin.sln"
 $SourceBasePath = "$PSScriptRoot\src\dotnet"
 
 $VsWhereOutput = [xml] (& "$PSScriptRoot\tools\vswhere.exe" -format xml)

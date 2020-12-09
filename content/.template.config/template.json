@@ -78,7 +78,7 @@
                         ".gitignore",
                         "CHANGELOG.md",
                         "README.md",
-                        "SamplePlugin.sln",
+                        "ReSharperPlugin.SamplePlugin.sln",
                         "src/dotnet/*/**/*",
                         "src/dotnet/Plugin.props",
                         "src/rider/main/resources/META-INF/plugin.xml"
