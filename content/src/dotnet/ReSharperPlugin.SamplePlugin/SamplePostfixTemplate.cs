@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace ReSharperPlugin.FluentValidation
+namespace ReSharperPlugin.SamplePlugin
 {
     [PostfixTemplate("writeLine", "WriteLine an expression", "Console.WriteLine(expr)")]
     public class SamplePostfixTemplate : CSharpPostfixTemplate
@@ -19,6 +19,7 @@ namespace ReSharperPlugin.FluentValidation
                 ? null
                 : new PostfixTemplateInfo("writeLine", withValuesContexts, availableInPreciseMode: true);
         }
+
         public override PostfixTemplateBehavior CreateBehavior(PostfixTemplateInfo info)
         {
             return new SamplePostfixBehavior(info);
