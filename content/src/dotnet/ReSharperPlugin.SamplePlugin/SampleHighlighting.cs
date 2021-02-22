@@ -23,7 +23,7 @@ namespace ReSharperPlugin.SamplePlugin
         ToolTipFormatString = Message)]
     public class SampleHighlighting : IHighlighting
     {
-        public const string SeverityId = nameof(SampleHighlighting);
+        public const string SeverityId = "SampleInspection"; // Appears in suppression comments
         public const string Message = nameof(SampleHighlighting) + " message";
         public const string Description = nameof(SampleHighlighting) + " description";
         
