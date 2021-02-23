@@ -19,10 +19,10 @@ dotnet new --install JetBrains.ReSharper.SamplePlugin --nuget-source ./
 Afterwards, a new project can be created from the installed template. The `name` identifier should be letters-only:
 
 ```
-dotnet new resharper-rider-plugin --name MyAwesomePlugin [--include-samples] [--resharper-only]
+dotnet new resharper-rider-plugin --name MyAwesomePlugin [--include-samples] [--resharper-only] [--build-only]
 ```
 
-This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`. Passing `--include-samples` will include a set of sample implementations for actions, code inspections, option pages, and more. Passing `--resharper-only` will exclude all Rider related files. Metadata including project website, description, author and others should be entered in `Plugin.props` and `plugins.xml`.
+This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`. Passing `--include-samples` will include a set of sample implementations for actions, code inspections, option pages, and more. Passing `--resharper-only` will exclude all Rider related files. With the `--build-only --force`, all the build-relevant files can be updated. Metadata including project website, description, author and others should be entered in `Plugin.props` and `plugins.xml`.
 
 :warning: _The only place that currently needs to be updated manually is the `RIDER_PLUGIN_ID` in `README.md`, which you'll only get after uploading your Rider plugin the first time._
 
@@ -58,8 +58,8 @@ Opening the solution in Rider or IntelliJ IDEA will automatically provide the co
 
 There are a couple of version identifiers that should always be updated synchronously:
 
-- The `sdkVersion` variable in [build.gradle](https://github.com/matkoch/resharper-sampleplugin/blob/0b8fe5034141b7f731038acd8de3aa793f8bc630/content/build.gradle#L21) is responsible for download a certain Rider frontend distribution
-- The `SdkVersion` property in [Plugin.props](https://github.com/matkoch/resharper-sampleplugin/blob/0b8fe5034141b7f731038acd8de3aa793f8bc630/content/src/dotnet/Plugin.props#L3) will affect the referenced `JetBrains.ReSharper.SDK` NuGet package and will also determine the `wave` version that is required for the Extension Manager in ReSharper
+- The `ProductVersion` variable in [build.gradle](https://github.com/JetBrains/resharper-rider-plugin/blob/master/content/gradle.properties#L17) is responsible for download a certain Rider frontend distribution
+- The `SdkVersion` property in [Plugin.props](https://github.com/JetBrains/resharper-rider-plugin/blob/master/content/src/dotnet/Plugin.props#L4) will affect the referenced `JetBrains.ReSharper.SDK` NuGet package and will also determine the `wave` version that is required for the Extension Manager in ReSharper
 - The `runVisualStudio.ps1` script will always download the latest available installer for ReSharper - this can be either a normal release or early-access-program (EAP) release
 
 Available versions are listed here for [ReSharper](https://www.nuget.org/packages/JetBrains.ReSharper.SDK) and [Rider](https://www.jetbrains.com/intellij-repository/snapshots) (under `com.jetbrains.intellij.rider`).
@@ -79,9 +79,9 @@ Using [attached folders](https://www.jetbrains.com/help/rider/Extending_Your_Sol
 Both plugins can be published by calling:
 
 ```
-# For Rider
-gradlew :publishPlugin -PpluginVersion=<version> -Pusername=<username> -Ppassword=<password>
+# For Rider & ReSharper (Gradle)
+gradlew :publishPlugin -PPluginVersion=<version> -PPublishToken=<token>
 
-# For ReSharper (VisualStudio)
+# For ReSharper (PowerShell)
 powershell ./publishPlugin.ps1 -Version <version> -ApiKey <ApiKey>
 ```
