@@ -87,7 +87,6 @@ task compileDotNet {
 }
 
 buildPlugin {
-    outputs.upToDateWhen { false }
     doLast {
         copy {
             from "${buildDir}/distributions/${rootProject.name}-${version}.zip"
