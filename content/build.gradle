@@ -1,21 +1,11 @@
 // Reference https://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/gradle_guide.html
 import org.apache.tools.ant.taskdefs.condition.Os
 
-buildscript {
-    repositories {
-        maven { url 'https://www.myget.org/F/rd-snapshots/maven/' }
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.jetbrains.rd:rd-gen:0.211.235") // https://www.myget.org/feed/rd-snapshots/package/maven/com.jetbrains.rd/rd-gen
-    }
-}
-
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
-    id 'org.jetbrains.intellij' version '0.7.2' // https://github.com/JetBrains/gradle-intellij-plugin/releases
+    id 'org.jetbrains.intellij' version '0.7.2'     // https://github.com/JetBrains/gradle-intellij-plugin/releases
+    id 'com.jetbrains.rdgen' version '0.211.235'    // https://www.myget.org/feed/rd-snapshots/package/maven/com.jetbrains.rd/rd-gen
 }
 
 ext {
@@ -127,8 +117,6 @@ runIde {
     // jbrVersion("jbr_jcef-11_0_6b765.40") // https://confluence.jetbrains.com/display/JBR/Release+notes
 }
 
-apply plugin: 'com.jetbrains.rdgen'
-
 rdgen {
     def modelDir = new File(rootDir, "protocol/src/main/kotlin/model")
     def csOutput = new File(rootDir, "src/dotnet/${DotnetPluginId}/Rider")
@@ -160,6 +148,7 @@ rdgen {
 }
 
 patchPluginXml {
+    // TODO: See also org.jetbrains.changelog: https://github.com/JetBrains/gradle-changelog-plugin
     def changelogText = file("${rootDir}/CHANGELOG.md").text
     def changelogMatches = changelogText =~ /(?s)(-.+?)(?=##|$)/
 
