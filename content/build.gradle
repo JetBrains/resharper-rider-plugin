@@ -4,14 +4,14 @@ import org.apache.tools.ant.taskdefs.condition.Os
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
-    id 'org.jetbrains.intellij' version '0.7.2'     // https://github.com/JetBrains/gradle-intellij-plugin/releases
+    id 'org.jetbrains.intellij' version '1.0'     // https://github.com/JetBrains/gradle-intellij-plugin/releases
     id 'com.jetbrains.rdgen' version '0.211.235'    // https://www.myget.org/feed/rd-snapshots/package/maven/com.jetbrains.rd/rd-gen
 }
 
 ext {
     isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
     rdLibDirectory = {
-        new File(intellij.ideaDependency.classes, "lib/rd")
+        new File(intellij.getIdeaDependency(project).classes, "lib/rd")
     }
 }
 
@@ -110,7 +110,7 @@ intellij {
     downloadSources = false
     instrumentCode = false
     // TODO: add plugins
-    // plugins("uml", "com.jetbrains.ChooseRuntime:1.0.9")
+    // plugins = ["uml", "com.jetbrains.ChooseRuntime:1.0.9"]
 }
 
 runIde {
@@ -122,7 +122,7 @@ runIde {
     autoReloadPlugins = false
 
     // gradle-intellij-plugin will download the default version of the JBR for the snapshot. Update if required
-    // jbrVersion("jbr_jcef-11_0_6b765.40") // https://confluence.jetbrains.com/display/JBR/Release+notes
+    // jbrVersion = "jbr_jcef-11_0_6b765.40" // https://confluence.jetbrains.com/display/JBR/Release+notes
 }
 
 rdgen {
