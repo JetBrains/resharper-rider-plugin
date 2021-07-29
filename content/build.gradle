@@ -177,7 +177,7 @@ prepareSandbox {
 
     dllFiles.forEach({ f ->
         def file = file(f)
-        from(file, { into "${intellij.pluginName}/dotnet" })
+        from(file, { into "${rootProject.name}/dotnet" })
     })
 
     doLast {
@@ -195,7 +195,7 @@ publishPlugin {
     doLast {
         exec {
             executable "dotnet"
-            args "nuget","push","output/${DotnetPluginId}.${version}.nupkg","--api-key",token,"--source","https://plugins.jetbrains.com"
+            args "nuget","push","output/${DotnetPluginId}.${version}.nupkg","--api-key","${PublishToken}","--source","https://plugins.jetbrains.com"
             workingDir rootDir
         }
     }
