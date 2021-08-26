@@ -1,5 +1,5 @@
 <idea-plugin require-restart="true">
-  <id>sampleplugin-rider</id>
+  <id>com.jetbrains.rider.plugins.sampleplugin</id>
   <name>SamplePlugin</name>
   <version>_PLACEHOLDER_</version>
   <vendor url="https://project-url">Author</vendor>
