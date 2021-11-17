@@ -15,7 +15,21 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <applicationConfigurable groupId="language" instance="com.jetbrains.rider.plugins.sampleplugin.SampleOptionsPage" id="SampleOptionsPage" />
+    <toolWindow id="NUKE"
+                secondary="true"
+                anchor="right"
+                factoryClass="com.jetbrains.rider.plugins.nuke.toolWindow.NukeToolWindowFactory"
+                icon="ReSharperIcons.Common.Success"/>
+
+    <rdclient.view key="com.jetbrains.rider.plugins.nuke.BeNukeToolWindowPanel"
+                   implementationClass="com.jetbrains.rider.plugins.nuke.toolWindow.NukeToolWindowPanel" />
   </extensions>
+
+  <project-components>
+    <component>
+      <implementation-class>com.jetbrains.rider.plugins.sampleplugin.</implementation-class>
+    </component>
+  </project-components>
 
   <actions>
     <action id="SampleAction" class="com.jetbrains.rider.plugins.sampleplugin.SampleAction"
