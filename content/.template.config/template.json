@@ -15,12 +15,6 @@
     "primaryOutputs": [
     ],
     "symbols": {
-        "include-samples":{
-            "type": "parameter",
-            "dataType":"bool",
-            "defaultValue": "false",
-            "description": "Emit sample code for highlights, quick-fixes, actions, and more."
-        },
         "build-only":{
             "type": "parameter",
             "dataType":"bool",
@@ -57,18 +51,6 @@
                         "gradlew",
                         "gradlew.bat",
                         "settings.gradle"
-                    ]
-                },
-                {
-                    "condition": "(!include-samples || resharper-only || build-only)",
-                    "exclude": [ "**/*.kt" ]
-                },
-                {
-                    "condition": "(!include-samples)",
-                    "exclude": [
-                        "src/dotnet/**/*.cs",
-                        "src/dotnet/**/*.gold",
-                        "src/dotnet/**/*.DotSettings"
                     ]
                 },
                 {

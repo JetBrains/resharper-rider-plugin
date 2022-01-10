@@ -19,15 +19,6 @@
     <PackageReference Include="Wave" Version="[$(WaveVersion),$(UpperWaveVersion))" />
   </ItemGroup>
 
-<!--#if (resharper-only) -->
-  <ItemGroup>
-    <Compile Remove="Rider\**\*" />
-    <None Remove="Rider\**\*" />
-    <EmbeddedResource Remove="Rider\**\*" />
-    <Content Remove="Rider\**\*" />
-  </ItemGroup>
-<!--#endif -->
-
   <ItemGroup>
     <Content Include="bin\$(AssemblyName)\$(Configuration)\$(AssemblyName).dll" PackagePath="dotFiles" Pack="true" Visible="false" />
     <Content Include="bin\$(AssemblyName)\$(Configuration)\$(AssemblyName).pdb" PackagePath="dotFiles" Pack="true" Visible="false" />

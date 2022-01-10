@@ -7,9 +7,7 @@ namespace ReSharperPlugin.SamplePlugin
 {
     [ZoneDefinition]
     // [ZoneDefinitionConfigurableFeature("Title", "Description", IsInProductSection: false)]
-    public interface ISamplePluginZone : IPsiLanguageZone,
-        IRequire<ILanguageCSharpZone>,
-        IRequire<DaemonZone>
+    public interface ISamplePluginZone
     {
     }
 }

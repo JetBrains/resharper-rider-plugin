@@ -11,13 +11,12 @@ using NUnit.Framework;
 
 namespace ReSharperPlugin.SamplePlugin.Tests
 {
-
     [ZoneDefinition]
     public class SamplePluginTestEnvironmentZone : ITestsEnvZone, IRequire<PsiFeatureTestZone>, IRequire<ISamplePluginZone> { }
 
     [ZoneMarker]
     public class ZoneMarker : IRequire<ICodeEditingZone>, IRequire<ILanguageCSharpZone>, IRequire<SamplePluginTestEnvironmentZone> { }
-    
+
     [SetUpFixture]
     public class SamplePluginTestsAssembly : ExtensionTestEnvironmentAssembly<SamplePluginTestEnvironmentZone> { }
 }
