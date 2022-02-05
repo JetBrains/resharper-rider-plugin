@@ -85,3 +85,5 @@ gradlew :publishPlugin -PPluginVersion=<version> -PPublishToken=<token>
 # For ReSharper (PowerShell)
 powershell ./publishPlugin.ps1 -Version <version> -ApiKey <ApiKey>
 ```
+
+⚠️ The first deployment must be done through the [marketplace](https://plugins.jetbrains.com/).
