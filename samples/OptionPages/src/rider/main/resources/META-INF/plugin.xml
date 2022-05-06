@@ -1,0 +1,23 @@
+<idea-plugin require-restart="true">
+  <id>com.jetbrains.rider.plugins.samples.options</id>
+  <name>ReSharper SDK – Options</name>
+  <version>_PLACEHOLDER_</version>
+  <vendor url="https://github.com/JetBrains/resharper-sdk-code-samples">Matthias Koch</vendor>
+  <idea-version since-build="_PLACEHOLDER_" until-build="_PLACEHOLDER_" />
+  <depends>com.intellij.modules.rider</depends>
+
+  <description>
+<![CDATA[
+<p>Adds option pages to the settings dialog.</p>
+]]>
+  </description>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- https://plugins.jetbrains.com/docs/intellij/settings-guide.html#values-for-parent-id-attribute -->
+    <applicationConfigurable
+            parentId="tools"
+            instance="com.jetbrains.rider.plugins.samples.options.SamplePage"
+            id="SamplePage" />
+  </extensions>
+
+</idea-plugin>

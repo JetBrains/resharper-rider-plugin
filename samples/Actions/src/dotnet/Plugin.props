@@ -1,0 +1,18 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <SdkVersion>2021.3.0</SdkVersion>
+
+    <Title>ReSharper SDK – Actions</Title>
+    <Description>Adds a global action that triggers a message box.</Description>
+
+    <Authors>Author</Authors>
+    <Copyright>Copyright $([System.DateTime]::Now.Year) JetBrains s.r.o.</Copyright>
+    <PackageTags>resharper plugin</PackageTags>
+
+    <PackageProjectUrl>https://github.com/JetBrains/resharper-sdk-code-samples</PackageProjectUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageIconUrl></PackageIconUrl>
+  </PropertyGroup>
+
+</Project>
