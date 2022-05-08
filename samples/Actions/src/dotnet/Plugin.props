@@ -1,7 +1,7 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <SdkVersion>2021.3.0</SdkVersion>
+    <SdkVersion>2022.1.0</SdkVersion>
 
     <Title>ReSharper SDK – Actions</Title>
     <Description>Adds a global action that triggers a message box.</Description>
