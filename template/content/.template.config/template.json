@@ -30,8 +30,8 @@
         "version":{
             "type": "parameter",
             "dataType":"string",
-            "defaultValue": "2021.3",
-            "replaces":"2021.3"
+            "defaultValue": "2022.1",
+            "replaces":"2022.1"
         }
     },
     "sources": [
