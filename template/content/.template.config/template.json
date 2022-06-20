@@ -11,7 +11,7 @@
         "platform": ".NET"
     },
     "sourceName": "SamplePlugin",
-    "preferNameDirectory" : "true",
+    "preferNameDirectory" : true,
     "primaryOutputs": [
     ],
     "symbols": {
