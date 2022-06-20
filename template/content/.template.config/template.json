@@ -32,6 +32,12 @@
             "dataType":"string",
             "defaultValue": "2022.1",
             "replaces":"2022.1"
+        },
+        "github-actions":{
+            "type": "parameter",
+            "dataType":"bool",
+            "defaultValue": "false",
+            "description": "Include GitHub Actions workflow files."
         }
     },
     "sources": [
@@ -64,6 +70,12 @@
                         "src/dotnet/*/**/*",
                         "src/dotnet/Plugin.props",
                         "src/rider/main/resources/META-INF/plugin.xml"
+                    ]
+                },
+                {
+                    "condition": "(!github-actions)",
+                    "exclude": [
+                        ".github/workflows/*"
                     ]
                 }
             ]

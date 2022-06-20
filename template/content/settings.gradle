@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'sampleplugin'
+rootProject.name = 'ReSharperPlugin.SamplePlugin'
 
 include ':protocol'

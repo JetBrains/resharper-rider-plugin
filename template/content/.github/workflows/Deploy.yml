@@ -1,0 +1,21 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  Publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - run: ./gradlew :publishPlugin -PBuildConfiguration="Release" -PPluginVersion="${{ github.ref_name }}" -PPublishToken="${{ env.PUBLISH_TOKEN }}"
+        env:
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+      - uses: actions/upload-artifact@v3
+        if: always()
+          name: ${{ github.event.repository.name }}.${{ github.ref_name }}
+          path: output
