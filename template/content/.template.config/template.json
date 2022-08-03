@@ -46,8 +46,8 @@
                 {
                     "condition": "(resharper-only)",
                     "exclude": [
-                        ".run/Rider*.run.xml",
-                        ".run/rdgen*.run.xml",
+                        ".idea/**/Rider*.xml",
+                        ".idea/**/rdgen*.xml",
                         "gradle/**/*",
                         "protocol/**/*",
                         "src/dotnet/**/*.Rider.csproj",
