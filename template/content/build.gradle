@@ -29,6 +29,10 @@ wrapper {
 
 version = ext.PluginVersion
 
+tasks.named("processResources") {
+    from("dependencies.json", { into "META-INF" })
+}
+
 sourceSets {
     main {
         java.srcDir 'src/rider/main/java'
