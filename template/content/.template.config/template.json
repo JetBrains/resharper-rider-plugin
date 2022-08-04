@@ -8,7 +8,8 @@
     "tags": {
         "type": "project",
         "language": "C#",
-        "platform": ".NET"
+        "platform": ".NET",
+        "hasMultipleProjects": "true"
     },
     "sourceName": "SamplePlugin",
     "preferNameDirectory" : true,
