@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>JetBrains.ReSharper.SamplePlugin</id>
-        <version>2022.2.1</version>
+        <version>2022.2.2</version>
         <authors>Matthias Koch</authors>
         <owners>JetBrains</owners>
         <packageTypes>
