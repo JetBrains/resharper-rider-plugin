@@ -1,5 +1,6 @@
 // Reference https://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/gradle_guide.html
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.jetbrains.intellij.tasks.PrepareSandboxTask
 
 plugins {
     id 'java'
@@ -34,6 +35,9 @@ sourceSets {
         java.srcDir 'src/rider/main/java'
         kotlin.srcDir 'src/rider/main/kotlin'
         resources.srcDir 'src/rider/main/resources'
+    }
+    test {
+        kotlin.srcDir 'src/rider/test/kotlin'
     }
 }
 
@@ -166,6 +170,15 @@ rdgen {
     }
 }
 
+test {
+    useTestNG()
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
+    environment["LOCAL_ENV_RUN"] = "true"
+}
+
 patchPluginXml {
     // TODO: See also org.jetbrains.changelog: https://github.com/JetBrains/gradle-changelog-plugin
     def changelogText = file("${rootDir}/CHANGELOG.md").text
@@ -176,7 +189,7 @@ patchPluginXml {
     }.take(1).join('')
 }
 
-prepareSandbox {
+tasks.withType(PrepareSandboxTask).configureEach {
     dependsOn compileDotNet
 
     def outputFolder = "${rootDir}/src/dotnet/${DotnetPluginId}/bin/${DotnetPluginId}.Rider/${BuildConfiguration}"
