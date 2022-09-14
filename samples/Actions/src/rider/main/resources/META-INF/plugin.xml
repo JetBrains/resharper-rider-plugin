@@ -19,6 +19,7 @@
       <keyboard-shortcut keymap="Visual Studio" first-keystroke="shift control I"/>
       <keyboard-shortcut keymap="Visual Studio OSX" first-keystroke="shift meta I"/>
     </action>
+    <action id="TestAction" class="com.jetbrains.rider.plugins.samples.actions.TestAction" />
   </actions>
 
 </idea-plugin>
