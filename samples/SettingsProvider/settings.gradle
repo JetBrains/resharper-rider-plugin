@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'settingsprovider'
+rootProject.name = 'ReSharperPlugin.SettingsProvider'
 
 include ':protocol'

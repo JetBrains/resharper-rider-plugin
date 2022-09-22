@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'notifications'
+rootProject.name = 'ReSharperPlugin.Notifications'
 
 include ':protocol'

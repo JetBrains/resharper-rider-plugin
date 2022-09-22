@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'actions'
+rootProject.name = 'ReSharperPlugin.Actions'
 
 include ':protocol'

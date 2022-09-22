@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'rdprotocol'
+rootProject.name = 'ReSharperPlugin.RdProtocol'
 
 include ':protocol'

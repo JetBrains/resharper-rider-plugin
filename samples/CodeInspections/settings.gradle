@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'codeinspections'
+rootProject.name = 'ReSharperPlugin.CodeInspections'
 
 include ':protocol'

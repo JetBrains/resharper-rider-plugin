@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'postfixtemplates'
+rootProject.name = 'ReSharperPlugin.PostfixTemplates'
 
 include ':protocol'

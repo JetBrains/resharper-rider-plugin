@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'codevision'
+rootProject.name = 'ReSharperPlugin.CodeVision'
 
 include ':protocol'

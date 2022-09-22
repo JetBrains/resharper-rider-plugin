@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'optionpages'
+rootProject.name = 'ReSharperPlugin.OptionPages'
 
 include ':protocol'
