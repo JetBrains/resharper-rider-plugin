@@ -2,7 +2,7 @@
 
 # Plugin Template for ReSharper and Rider
 
-This repository defines a template for easy development of ReSharper and Rider plugins according to the official documentation for the [ReSharper SDK](https://www.jetbrains.com/help/resharper/sdk/README.html) and [IntelliJ SDK](http://www.jetbrains.org/intellij/sdk/docs/welcome.html).
+This repository defines a template for easy development of ReSharper and Rider plugins according to the official documentation for the [ReSharper SDK](https://www.jetbrains.com/help/resharper/sdk) and [IntelliJ SDK](http://www.jetbrains.org/intellij/sdk/docs/welcome.html).
 
 ## Getting Started
 
