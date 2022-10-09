@@ -50,7 +50,7 @@ class CefToolWindowModel private constructor(
         }
         
         
-        const val serializationHash = 4418284180864526030L
+        const val serializationHash = -2409565546485374679L
         
     }
     override val serializersOwner: ISerializersOwner get() = CefToolWindowModel
@@ -110,6 +110,8 @@ class BeCefToolWindowPanel private constructor(
     private val _openDevTools: RdSignal<Boolean>,
     private val _openUrl: RdSignal<String>,
     private val _getResource: RdCall<String, String>,
+    private val _sendMessage: RdCall<String, Unit>,
+    private val _messageReceived: RdSignal<String>,
     _enabled: RdProperty<Boolean>,
     _controlId: RdProperty<String>,
     _tooltip: RdProperty<@org.jetbrains.annotations.Nls String?>,
@@ -140,7 +142,9 @@ class BeCefToolWindowPanel private constructor(
             val _openDevTools = RdSignal.read(ctx, buffer, FrameworkMarshallers.Bool)
             val _openUrl = RdSignal.read(ctx, buffer, FrameworkMarshallers.String)
             val _getResource = RdCall.read(ctx, buffer, FrameworkMarshallers.String, FrameworkMarshallers.String)
-            return BeCefToolWindowPanel(url, html, _openDevTools, _openUrl, _getResource, _enabled, _controlId, _tooltip, _focus, _visible).withId(_id)
+            val _sendMessage = RdCall.read(ctx, buffer, FrameworkMarshallers.String, FrameworkMarshallers.Void)
+            val _messageReceived = RdSignal.read(ctx, buffer, FrameworkMarshallers.String)
+            return BeCefToolWindowPanel(url, html, _openDevTools, _openUrl, _getResource, _sendMessage, _messageReceived, _enabled, _controlId, _tooltip, _focus, _visible).withId(_id)
         }
         
         override fun write(ctx: SerializationCtx, buffer: AbstractBuffer, value: BeCefToolWindowPanel)  {
@@ -155,6 +159,8 @@ class BeCefToolWindowPanel private constructor(
             RdSignal.write(ctx, buffer, value._openDevTools)
             RdSignal.write(ctx, buffer, value._openUrl)
             RdCall.write(ctx, buffer, value._getResource)
+            RdCall.write(ctx, buffer, value._sendMessage)
+            RdSignal.write(ctx, buffer, value._messageReceived)
         }
         
         private val __StringNullableSerializer = FrameworkMarshallers.String.nullable()
@@ -164,16 +170,22 @@ class BeCefToolWindowPanel private constructor(
     val openDevTools: ISignal<Boolean> get() = _openDevTools
     val openUrl: ISignal<String> get() = _openUrl
     val getResource: IRdCall<String, String> get() = _getResource
+    val sendMessage: IRdEndpoint<String, Unit> get() = _sendMessage
+    val messageReceived: IAsyncSignal<String> get() = _messageReceived
     //methods
     //initializer
     init {
         _getResource.async = true
+        _sendMessage.async = true
+        _messageReceived.async = true
     }
     
     init {
         bindableChildren.add("openDevTools" to _openDevTools)
         bindableChildren.add("openUrl" to _openUrl)
         bindableChildren.add("getResource" to _getResource)
+        bindableChildren.add("sendMessage" to _sendMessage)
+        bindableChildren.add("messageReceived" to _messageReceived)
     }
     
     //secondary constructor
@@ -186,6 +198,8 @@ class BeCefToolWindowPanel private constructor(
         RdSignal<Boolean>(FrameworkMarshallers.Bool),
         RdSignal<String>(FrameworkMarshallers.String),
         RdCall<String, String>(FrameworkMarshallers.String, FrameworkMarshallers.String),
+        RdCall<String, Unit>(FrameworkMarshallers.String, FrameworkMarshallers.Void),
+        RdSignal<String>(FrameworkMarshallers.String),
         RdProperty<Boolean>(true, FrameworkMarshallers.Bool),
         RdProperty<String>("", FrameworkMarshallers.String),
         RdProperty<@org.jetbrains.annotations.Nls String?>(null, __StringNullableSerializer),
@@ -204,6 +218,8 @@ class BeCefToolWindowPanel private constructor(
             print("openDevTools = "); _openDevTools.print(printer); println()
             print("openUrl = "); _openUrl.print(printer); println()
             print("getResource = "); _getResource.print(printer); println()
+            print("sendMessage = "); _sendMessage.print(printer); println()
+            print("messageReceived = "); _messageReceived.print(printer); println()
             print("enabled = "); _enabled.print(printer); println()
             print("controlId = "); _controlId.print(printer); println()
             print("tooltip = "); _tooltip.print(printer); println()
@@ -220,6 +236,8 @@ class BeCefToolWindowPanel private constructor(
             _openDevTools.deepClonePolymorphic(),
             _openUrl.deepClonePolymorphic(),
             _getResource.deepClonePolymorphic(),
+            _sendMessage.deepClonePolymorphic(),
+            _messageReceived.deepClonePolymorphic(),
             _enabled.deepClonePolymorphic(),
             _controlId.deepClonePolymorphic(),
             _tooltip.deepClonePolymorphic(),

@@ -76,7 +76,7 @@ namespace JetBrains.Rider.Model
     
     
     
-    protected override long SerializationHash => 4418284180864526030L;
+    protected override long SerializationHash => -2409565546485374679L;
     
     protected override Action<ISerializers> Register => RegisterDeclaredTypesSerializers;
     public static void RegisterDeclaredTypesSerializers(ISerializers serializers)
@@ -130,11 +130,15 @@ namespace JetBrains.Rider.Model
     [NotNull] public ISignal<bool> OpenDevTools => _OpenDevTools;
     [NotNull] public ISignal<string> OpenUrl => _OpenUrl;
     [NotNull] public IRdEndpoint<string, string> GetResource => _GetResource;
+    [NotNull] public IRdCall<string, Unit> SendMessage => _SendMessage;
+    [NotNull] public ISignal<string> MessageReceived => _MessageReceived;
     
     //private fields
     [NotNull] private readonly RdSignal<bool> _OpenDevTools;
     [NotNull] private readonly RdSignal<string> _OpenUrl;
     [NotNull] private readonly RdCall<string, string> _GetResource;
+    [NotNull] private readonly RdCall<string, Unit> _SendMessage;
+    [NotNull] private readonly RdSignal<string> _MessageReceived;
     
     //primary constructor
     private BeCefToolWindowPanel(
@@ -143,6 +147,8 @@ namespace JetBrains.Rider.Model
       [NotNull] RdSignal<bool> openDevTools,
       [NotNull] RdSignal<string> openUrl,
       [NotNull] RdCall<string, string> getResource,
+      [NotNull] RdCall<string, Unit> sendMessage,
+      [NotNull] RdSignal<string> messageReceived,
       [NotNull] RdProperty<bool> enabled,
       [NotNull] RdProperty<string> controlId,
       [NotNull] RdProperty<string> tooltip,
@@ -159,16 +165,24 @@ namespace JetBrains.Rider.Model
       if (openDevTools == null) throw new ArgumentNullException("openDevTools");
       if (openUrl == null) throw new ArgumentNullException("openUrl");
       if (getResource == null) throw new ArgumentNullException("getResource");
+      if (sendMessage == null) throw new ArgumentNullException("sendMessage");
+      if (messageReceived == null) throw new ArgumentNullException("messageReceived");
       
       Url = url;
       Html = html;
       _OpenDevTools = openDevTools;
       _OpenUrl = openUrl;
       _GetResource = getResource;
+      _SendMessage = sendMessage;
+      _MessageReceived = messageReceived;
       _GetResource.Async = true;
+      _SendMessage.Async = true;
+      _MessageReceived.Async = true;
       BindableChildren.Add(new KeyValuePair<string, object>("openDevTools", _OpenDevTools));
       BindableChildren.Add(new KeyValuePair<string, object>("openUrl", _OpenUrl));
       BindableChildren.Add(new KeyValuePair<string, object>("getResource", _GetResource));
+      BindableChildren.Add(new KeyValuePair<string, object>("sendMessage", _SendMessage));
+      BindableChildren.Add(new KeyValuePair<string, object>("messageReceived", _MessageReceived));
     }
     //secondary constructor
     public BeCefToolWindowPanel (
@@ -180,6 +194,8 @@ namespace JetBrains.Rider.Model
       new RdSignal<bool>(JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool),
       new RdSignal<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString),
       new RdCall<string, string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString),
+      new RdCall<string, Unit>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadVoid, JetBrains.Rd.Impl.Serializers.WriteVoid),
+      new RdSignal<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString),
       new RdProperty<bool>(JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool, true),
       new RdProperty<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, ""),
       new RdProperty<string>(ReadStringNullable, WriteStringNullable),
@@ -202,7 +218,9 @@ namespace JetBrains.Rider.Model
       var openDevTools = RdSignal<bool>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool);
       var openUrl = RdSignal<string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
       var getResource = RdCall<string, string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
-      var _result = new BeCefToolWindowPanel(url, html, openDevTools, openUrl, getResource, enabled, controlId, tooltip, focus, visible).WithId(_id);
+      var sendMessage = RdCall<string, Unit>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadVoid, JetBrains.Rd.Impl.Serializers.WriteVoid);
+      var messageReceived = RdSignal<string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
+      var _result = new BeCefToolWindowPanel(url, html, openDevTools, openUrl, getResource, sendMessage, messageReceived, enabled, controlId, tooltip, focus, visible).WithId(_id);
       return _result;
     };
     public static CtxReadDelegate<string> ReadStringNullable = JetBrains.Rd.Impl.Serializers.ReadString.NullableClass();
@@ -221,6 +239,8 @@ namespace JetBrains.Rider.Model
       RdSignal<bool>.Write(ctx, writer, value._OpenDevTools);
       RdSignal<string>.Write(ctx, writer, value._OpenUrl);
       RdCall<string, string>.Write(ctx, writer, value._GetResource);
+      RdCall<string, Unit>.Write(ctx, writer, value._SendMessage);
+      RdSignal<string>.Write(ctx, writer, value._MessageReceived);
     };
     public static  CtxWriteDelegate<string> WriteStringNullable = JetBrains.Rd.Impl.Serializers.WriteString.NullableClass();
     public static  CtxWriteDelegate<JetBrains.Rider.Model.UIAutomation.ControlVisibility> WriteControlVisibility = new CtxWriteDelegate<JetBrains.Rider.Model.UIAutomation.ControlVisibility>(JetBrains.Rd.Impl.Serializers.WriteEnum<JetBrains.Rider.Model.UIAutomation.ControlVisibility>);
@@ -241,6 +261,8 @@ namespace JetBrains.Rider.Model
         printer.Print("openDevTools = "); _OpenDevTools.PrintEx(printer); printer.Println();
         printer.Print("openUrl = "); _OpenUrl.PrintEx(printer); printer.Println();
         printer.Print("getResource = "); _GetResource.PrintEx(printer); printer.Println();
+        printer.Print("sendMessage = "); _SendMessage.PrintEx(printer); printer.Println();
+        printer.Print("messageReceived = "); _MessageReceived.PrintEx(printer); printer.Println();
         printer.Print("enabled = "); _Enabled.PrintEx(printer); printer.Println();
         printer.Print("controlId = "); _ControlId.PrintEx(printer); printer.Println();
         printer.Print("tooltip = "); _Tooltip.PrintEx(printer); printer.Println();

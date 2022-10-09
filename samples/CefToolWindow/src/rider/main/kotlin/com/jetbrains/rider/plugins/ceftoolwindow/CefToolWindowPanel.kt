@@ -1,10 +1,15 @@
 package com.jetbrains.rider.plugins.ceftoolwindow
 
+import com.intellij.ui.jcef.JBCefJSQuery
 import com.jetbrains.rd.ide.model.BeCefToolWindowPanel
 import com.jetbrains.rd.ui.bindable.ViewBinder
 import com.jetbrains.rd.util.lifetime.Lifetime
+import com.jetbrains.rd.util.lifetime.onTermination
 import org.cef.CefApp
+import org.cef.browser.CefBrowser
+import org.cef.browser.CefFrame
 import org.cef.callback.CefCallback
+import org.cef.handler.CefLoadHandlerAdapter
 import org.cef.handler.CefResourceHandler
 import org.cef.misc.IntRef
 import org.cef.misc.StringRef
@@ -16,13 +21,29 @@ import javax.swing.JComponent
 class CefToolWindowPanel : ViewBinder<BeCefToolWindowPanel>
 {
     override fun bind(viewModel: BeCefToolWindowPanel, lifetime: Lifetime): JComponent {
+
         val htmlPanel = LoadableHtmlPanel(viewModel.url, viewModel.html)
 
-        CefApp.getInstance().registerSchemeHandlerFactory("nuke", "*") { browser, frame, scheme_name, request ->
+        // Open Dev Tools
+        viewModel.openDevTools.advise(lifetime) {
+            if (it)
+                htmlPanel.browser.openDevtools()
+            else
+                htmlPanel.browser.cefBrowser.devTools.close(true)
+        }
+
+        // Open URL
+        viewModel.openUrl.advise(lifetime) {
+            htmlPanel.browser.loadURL(it)
+        }
+
+
+        CefApp.getInstance().registerSchemeHandlerFactory("nuke", "*") { _, _, _, request ->
             val resource = viewModel.getResource.sync(request.url)
             val stream = resource.byteInputStream()
 
             object : CefResourceHandler {
+
                 override fun processRequest(req: CefRequest, callback: CefCallback): Boolean {
                     callback.Continue()
 
@@ -61,14 +82,38 @@ class CefToolWindowPanel : ViewBinder<BeCefToolWindowPanel>
             }
         }
 
-        // Open Dev Tools
-        viewModel.openDevTools.advise(lifetime) {
-           htmlPanel.browser.openDevtools()
+
+        // Web -> Rider
+        val jsRequestHandler = JBCefJSQuery.create(htmlPanel.browser)
+        jsRequestHandler.addHandler { request: String ->
+            viewModel.messageReceived.fire(request)
+            null
+        }
+        lifetime.onTermination { jsRequestHandler.dispose() }
+
+        val loadHandler = object : CefLoadHandlerAdapter() {
+
+            override fun onLoadEnd(browser: CefBrowser?, frame: CefFrame?, httpStatusCode: Int) {
+                val addEventListener = """
+                    if (!messageSentEvent) {
+                        var messageSentEvent = new Event('messageSentEvent');
+                        document.addEventListener('messageSentEvent', (message) => {
+                            ${jsRequestHandler.inject("JSON.stringify(message.detail)")}
+                        });
+                    }
+                    """.trimIndent()
+                frame?.executeJavaScript(addEventListener, frame.url, 0)
+            }
+        }
+        htmlPanel.browser.jbCefClient.addLoadHandler(loadHandler, htmlPanel.browser.cefBrowser)
+        lifetime.onTermination {
+            htmlPanel.browser.jbCefClient.removeLoadHandler(loadHandler, htmlPanel.browser.cefBrowser)
         }
 
-        // Open URL
-        viewModel.openUrl.advise(lifetime) {
-            htmlPanel.browser.loadURL(it)
+        // Rider -> Web
+        viewModel.sendMessage.set { message: String ->
+            val dispatchMessage = "document.dispatchEvent($message)"
+            htmlPanel.browser.cefBrowser.executeJavaScript(dispatchMessage, htmlPanel.browser.cefBrowser.url, 0)
         }
 
         return htmlPanel.component
