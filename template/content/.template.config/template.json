@@ -31,8 +31,8 @@
         "version":{
             "type": "parameter",
             "dataType":"string",
-            "defaultValue": "2022.2",
-            "replaces":"2022.2"
+            "defaultValue": "2022.3",
+            "replaces":"2022.3"
         },
         "github-actions":{
             "type": "parameter",
