@@ -20,8 +20,9 @@ dotnet new resharper-rider-plugin --name MyAwesomePlugin [--resharper-only] [--b
 
 This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`. Passing `--resharper-only` will exclude all Rider related files. With the `--build-only --force`, all the build-relevant files can be updated (some reverts are most likely necessary). Metadata including project website, description, author and others should be entered in `Plugin.props` and `plugins.xml`.
 
-> :warning: The only place that currently needs to be updated manually is the `RIDER_PLUGIN_ID` in `README.md`, which you'll only get after uploading your Rider plugin the first time.
-> 
+
+> **Warning**
+> The only place that currently needs to be updated manually is the `RIDER_PLUGIN_ID` in `README.md`, which you'll only get after uploading your Rider plugin the first time.
 
 ## Samples
 
@@ -97,4 +98,5 @@ gradlew :publishPlugin -PPluginVersion=<version> -PPublishToken=<token>
 powershell ./publishPlugin.ps1 -Version <version> -ApiKey <ApiKey>
 ```
 
-> :warning: The first deployment must be done through the [marketplace](https://plugins.jetbrains.com/).
+> **Warning**
+> The first deployment must be done through the [marketplace](https://plugins.jetbrains.com/).
