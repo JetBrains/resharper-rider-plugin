@@ -1,6 +1,8 @@
 ﻿<Project>
 
   <PropertyGroup>
+    <!-- See https://www.nuget.org/packages/JetBrains.ReSharper.SDK -->
+    <!-- Keep in sync with ProductVersion in gradle.properties -->
     <SdkVersion>2022.3.1</SdkVersion>
 
     <Title>SamplePlugin</Title>
