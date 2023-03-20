@@ -20,7 +20,7 @@
     <PackageReference Include="CefSharp.Wpf" Version="105.3.390" PrivateAssets="all" />
     <PackageReference Include="JetBrains.ReSharper.SDK" Version="$(SdkVersion)" PrivateAssets="all" />
     <!-- TODO: https://github.com/NuGet/Home/issues/7154 -->
-    <PackageReference Include="Wave" Version="[$(WaveVersion),$(UpperWaveVersion))" />
+    <PackageReference Include="Wave" Version="$(WaveVersion)" />
   </ItemGroup>
 
   <ItemGroup>
