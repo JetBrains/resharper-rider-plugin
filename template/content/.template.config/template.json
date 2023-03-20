@@ -84,7 +84,7 @@
     ],
     "postActions": [
         {
-            "condition": "(OS != \"Windows_NT\")",
+            "condition": "(OS != \"Windows_NT\" && !resharper-only)",
             "description": "Make gradlew executable",
             "manualInstructions": [ { "text": "Make gradlew executable" }  ],
             "actionId": "cb9a6cf3-4f5c-4860-b9d2-03a574959774",
