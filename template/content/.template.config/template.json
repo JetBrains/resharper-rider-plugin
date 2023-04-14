@@ -39,6 +39,15 @@
             "dataType":"bool",
             "defaultValue": "false",
             "description": "Include GitHub Actions workflow files."
+        },
+        "lowerCaseName":{
+            "type": "generated",
+            "generator": "casing",
+            "parameters": {
+                "source":"name",
+                "toLower": true
+            },
+            "fileRename": "sampleplugin"
         }
     },
     "sources": [
