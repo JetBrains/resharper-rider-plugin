@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'datacontext'
+rootProject.name = 'ReSharperPlugin.DataContext'
 
 include ':protocol'

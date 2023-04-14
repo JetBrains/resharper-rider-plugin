@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'miscellaneous'
+rootProject.name = 'ReSharperPlugin.Miscellaneous'
 
 include ':protocol'

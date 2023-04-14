@@ -17,6 +17,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'quickdocprovider'
+rootProject.name = 'ReSharperPlugin.QuickDocProvider'
 
 include ':protocol'
