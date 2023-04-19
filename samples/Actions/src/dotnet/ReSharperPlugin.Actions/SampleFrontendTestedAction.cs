@@ -8,16 +8,14 @@ using JetBrains.Util;
 namespace ReSharperPlugin.Actions;
 
 [Action(
-    ActionId: Id,
-    Text: "ReSharper SDK: Test Action",
+    ResourceType: typeof(Resources),
+    TextResourceName: nameof(Resources.SampleFrontendTestedActionText),
     // Icon must also be changed in frontend code
     Icon = typeof(FeaturesInternalThemedIcons.QuickStartToolWindow),
     IdeaShortcuts = new[] { "Shift+Control+T" },
     VsShortcuts = new[] { "Shift+Control+T" })]
-public class TestAction : IExecutableAction
+public class SampleFrontendTestedAction : IExecutableAction
 {
-    public const string Id = nameof(TestAction);
-
     public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
     {
         return true;

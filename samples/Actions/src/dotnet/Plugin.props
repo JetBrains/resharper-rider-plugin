@@ -1,16 +1,18 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <SdkVersion>2022.1.0</SdkVersion>
+    <!-- See https://www.nuget.org/packages/JetBrains.ReSharper.SDK -->
+    <!-- Keep in sync with ProductVersion in gradle.properties -->
+    <SdkVersion>2023.1.0</SdkVersion>
 
-    <Title>ReSharper SDK – Actions</Title>
-    <Description>Adds a global action that triggers a message box.</Description>
+    <Title>Actions</Title>
+    <Description>Description</Description>
 
     <Authors>Author</Authors>
-    <Copyright>Copyright $([System.DateTime]::Now.Year) JetBrains s.r.o.</Copyright>
+    <Copyright>Copyright $([System.DateTime]::Now.Year) Maintainers of Actions</Copyright>
     <PackageTags>resharper plugin</PackageTags>
 
-    <PackageProjectUrl>https://github.com/JetBrains/resharper-sdk-code-samples</PackageProjectUrl>
+    <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageIconUrl></PackageIconUrl>
   </PropertyGroup>

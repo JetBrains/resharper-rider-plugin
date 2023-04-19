@@ -6,7 +6,7 @@ import com.jetbrains.rider.test.base.BaseTestWithSolution
 import com.jetbrains.rider.test.scriptingApi.callAction
 import org.testng.annotations.Test
 
-class TestActionTest : BaseTestWithSolution() {
+class SampleFrontendTestedActionTest : BaseTestWithSolution() {
 
     override fun getSolutionDirectoryName() = "SolutionForTest"
 
@@ -15,7 +15,7 @@ class TestActionTest : BaseTestWithSolution() {
         val testFile = activeSolutionDirectory.resolve("file.txt")
         testFile.isFile.shouldBeFalse("Test file should not exist before test")
 
-        callAction(project, "TestAction")
+        callAction(project, "SampleFrontendTestedAction")
 
         testFile.isFile.shouldBeTrue("Test file should be created by the action")
     }
