@@ -9,15 +9,20 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace ReSharperPlugin.PostfixTemplates;
 
-[PostfixTemplate("cw", "ReSharper SDK: Console.WriteLine an expression", "Console.WriteLine(expr)")]
+[PostfixTemplate(
+    templateName: TemplateName,
+    description: "ReSharper SDK: Console.WriteLine an expression",
+    example: "Console.WriteLine(expr)")]
 public class SamplePostfixTemplate : CSharpPostfixTemplate
 {
+    public const string TemplateName = "cw";
+
     public override PostfixTemplateInfo TryCreateInfo(CSharpPostfixTemplateContext context)
     {
         var withValuesContexts = CSharpPostfixUtils.FindExpressionWithValuesContexts(context);
         return withValuesContexts.Length == 0
             ? null
-            : new PostfixTemplateInfo("cw", withValuesContexts, availableInPreciseMode: true);
+            : new PostfixTemplateInfo(TemplateName, withValuesContexts, availableInPreciseMode: true);
     }
 
     public override PostfixTemplateBehavior CreateBehavior(PostfixTemplateInfo info)
@@ -32,11 +37,11 @@ public class SamplePostfixTemplate : CSharpPostfixTemplate
         {
         }
 
-        protected override string ExpressionSelectTitle => "ReSharper SDK: Select expression to WriteLine";
+        protected override string ExpressionSelectTitle => Resources.SamplePostfixTemplateExpressionSelectTitle;
 
         protected override ICSharpStatement CreateStatement(CSharpElementFactory factory, ICSharpExpression expression)
         {
-            // Creating an IDeclaredType will allow using-directives to be added automatically
+            // Creating an IDeclaredType allows using-directives to be added automatically
             var type = TypeFactory.CreateTypeByCLRName("System.Console", expression.GetPsiModule());
             return factory.CreateStatement("$0.WriteLine($1);", type, expression);
         }

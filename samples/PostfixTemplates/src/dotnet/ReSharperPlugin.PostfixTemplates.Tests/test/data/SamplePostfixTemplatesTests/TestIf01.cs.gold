@@ -1,0 +1,11 @@
+﻿// ${COMPLETE_ITEM:cw}
+
+using System;
+
+public class Foo
+{
+    public void Bar(bool a)
+    {
+      Console.WriteLine(123);{caret}
+    }
+}

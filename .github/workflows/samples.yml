@@ -29,7 +29,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sample: ['CodeInspections', 'ContextActions']
+        sample: [
+          'CodeInspections',
+          'ContextActions',
+          'PostfixTemplates'
+        ]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
