@@ -52,5 +52,7 @@
 
     public static string SampleActionText => ResourceManager.GetString("SampleActionText");
     public static string SampleFrontendTestedActionText => ResourceManager.GetString("SampleFrontendTestedActionText");
+    public static string SampleActionDialogCaption => ResourceManager.GetString("SampleActionDialogCaption");
+    public static string SampleActionDescription => ResourceManager.GetString("SampleActionDescription");
   }
 }

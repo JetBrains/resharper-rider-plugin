@@ -19,9 +19,15 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="SampleActionText" xml:space="preserve">
-        <value>ReSharper SDK: SampleAction</value>
+        <value>ReSharper SDK: SampleActionText</value>
     </data>
     <data name="SampleFrontendTestedActionText" xml:space="preserve">
         <value>ReSharper SDK: SampleFrontendTestedAction</value>
+    </data>
+    <data name="SampleActionDialogCaption" xml:space="preserve">
+        <value>ReSharper SDK: SampleActionDialogCaption</value>
+    </data>
+    <data name="SampleActionDescription" xml:space="preserve">
+        <value>ReSharper SDK: SampleActionDescription</value>
     </data>
 </root>

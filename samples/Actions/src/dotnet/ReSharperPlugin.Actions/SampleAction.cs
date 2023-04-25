@@ -16,6 +16,7 @@ namespace ReSharperPlugin.Actions;
 [Action(
     ResourceType: typeof(Resources),
     TextResourceName: nameof(Resources.SampleActionText),
+    DescriptionResourceName = nameof(Resources.SampleActionText),
     // Icon must also be changed in frontend code
     Icon = typeof(FeaturesInternalThemedIcons.QuickStartToolWindow))]
 public class SampleAction : IExecutableAction
@@ -28,18 +29,16 @@ public class SampleAction : IExecutableAction
     public void Execute(IDataContext context, DelegateExecute nextExecute)
     {
         var dialogHost = context.GetComponent<IDialogHost>();
-        var shellLocks = context.GetComponent<IShellLocks>();
 
-        BeTextBox textBox = null;
+        BeTextBox textBox;
 
-        dialogHost.ShowModal(
-            Lifetime.Eternal,
-            shellLocks,
-            id: nameof(SampleAction),
-            title: "Dialog",
-            content: lt => textBox = BeControls.GetTextBox(lt),
-            submit: () => MessageBox.ShowInfo(
-                text: textBox.GetText(),
-                caption: $"{nameof(SampleAction)}.{nameof(Execute)}"));
+        dialogHost.Show(
+            getDialog: lt => BeControls.GetDialog(
+                    dialogContent: textBox = BeControls.GetTextBox(lt),
+                    title: Resources.SampleActionDialogCaption,
+                    id: nameof(SampleAction))
+                .WithOkButton(lt, () => MessageBox.ShowInfo($"Okay {textBox.GetText()}"))
+                .WithCancelButton(lt),
+            parentLifetime: Lifetime.Eternal);
     }
 }
