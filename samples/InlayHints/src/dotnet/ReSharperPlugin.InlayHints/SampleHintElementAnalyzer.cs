@@ -3,10 +3,9 @@ using JetBrains.Metadata.Reader.Impl;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Impl;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace ReSharperPlugin.CodeVision;
+namespace ReSharperPlugin.InlayHints;
 
 [ElementProblemAnalyzer(
     typeof(IAttribute),

@@ -1,10 +1,9 @@
-using JetBrains.Application.UI.Tooltips;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.InlayHints;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.UI.RichText;
 
-namespace ReSharperPlugin.CodeVision;
+namespace ReSharperPlugin.InlayHints;
 
 public abstract class SampleInlayHintBase : IInlayHintWithDescriptionHighlighting
 {

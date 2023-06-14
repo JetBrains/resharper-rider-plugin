@@ -1,7 +1,8 @@
 using JetBrains.ProjectModel;
 using JetBrains.TextControl.DocumentMarkup;
+using JetBrains.TextControl.DocumentMarkup.IntraTextAdornments;
 
-namespace ReSharperPlugin.CodeVision;
+namespace ReSharperPlugin.InlayHints;
 
 [SolutionComponent]
 public class SampleAdornmentProvider : IHighlighterIntraTextAdornmentProvider
