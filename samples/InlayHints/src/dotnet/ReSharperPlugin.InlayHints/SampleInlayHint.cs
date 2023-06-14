@@ -4,8 +4,9 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Feature.Services.InlayHints;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.TextControl.DocumentMarkup;
+using JetBrains.TextControl.DocumentMarkup.VisualStudio;
 
-namespace ReSharperPlugin.CodeVision;
+namespace ReSharperPlugin.InlayHints;
 
 [RegisterHighlighterGroup(
     HighlightAttributeGroupId,
@@ -20,6 +21,8 @@ namespace ReSharperPlugin.CodeVision;
     DarkBackgroundColor = "#3B3B3C",
     EffectType = EffectType.INTRA_TEXT_ADORNMENT,
     Layer = HighlighterLayer.ADDITIONAL_SYNTAX,
+    VsGenerateClassificationDefinition = VsGenerateDefinition.VisibleClassification,
+    VsBaseClassificationType = VsPredefinedClassificationType.Text,
     TransmitUpdates = true)]
 [DaemonIntraTextAdornmentProvider(typeof(SampleAdornmentProvider))]
 [DaemonTooltipProvider(typeof(InlayHintTooltipProvider))]
