@@ -151,12 +151,16 @@ namespace JetBrains.Rider.Model
       [NotNull] RdSignal<string> messageReceived,
       [NotNull] RdProperty<bool> enabled,
       [NotNull] RdProperty<string> controlId,
+      [NotNull] RdProperty<int> uniqueId,
+      [NotNull] RdProperty<string> dataId,
       [NotNull] RdProperty<string> tooltip,
       [NotNull] RdSignal<Unit> focus,
       [NotNull] RdProperty<JetBrains.Rider.Model.UIAutomation.ControlVisibility> visible
     ) : base (
       enabled,
       controlId,
+      uniqueId,
+      dataId,
       tooltip,
       focus,
       visible
@@ -198,6 +202,8 @@ namespace JetBrains.Rider.Model
       new RdSignal<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString),
       new RdProperty<bool>(JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool, true),
       new RdProperty<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, ""),
+      new RdProperty<int>(JetBrains.Rd.Impl.Serializers.ReadInt, JetBrains.Rd.Impl.Serializers.WriteInt),
+      new RdProperty<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, ""),
       new RdProperty<string>(ReadStringNullable, WriteStringNullable),
       new RdSignal<Unit>(JetBrains.Rd.Impl.Serializers.ReadVoid, JetBrains.Rd.Impl.Serializers.WriteVoid),
       new RdProperty<JetBrains.Rider.Model.UIAutomation.ControlVisibility>(ReadControlVisibility, WriteControlVisibility)
@@ -210,6 +216,8 @@ namespace JetBrains.Rider.Model
       var _id = RdId.Read(reader);
       var enabled = RdProperty<bool>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool);
       var controlId = RdProperty<string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
+      var uniqueId = RdProperty<int>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadInt, JetBrains.Rd.Impl.Serializers.WriteInt);
+      var dataId = RdProperty<string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
       var tooltip = RdProperty<string>.Read(ctx, reader, ReadStringNullable, WriteStringNullable);
       var focus = RdSignal<Unit>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadVoid, JetBrains.Rd.Impl.Serializers.WriteVoid);
       var visible = RdProperty<JetBrains.Rider.Model.UIAutomation.ControlVisibility>.Read(ctx, reader, ReadControlVisibility, WriteControlVisibility);
@@ -220,7 +228,7 @@ namespace JetBrains.Rider.Model
       var getResource = RdCall<string, string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
       var sendMessage = RdCall<string, Unit>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadVoid, JetBrains.Rd.Impl.Serializers.WriteVoid);
       var messageReceived = RdSignal<string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
-      var _result = new BeCefToolWindowPanel(url, html, openDevTools, openUrl, getResource, sendMessage, messageReceived, enabled, controlId, tooltip, focus, visible).WithId(_id);
+      var _result = new BeCefToolWindowPanel(url, html, openDevTools, openUrl, getResource, sendMessage, messageReceived, enabled, controlId, uniqueId, dataId, tooltip, focus, visible).WithId(_id);
       return _result;
     };
     public static CtxReadDelegate<string> ReadStringNullable = JetBrains.Rd.Impl.Serializers.ReadString.NullableClass();
@@ -231,6 +239,8 @@ namespace JetBrains.Rider.Model
       value.RdId.Write(writer);
       RdProperty<bool>.Write(ctx, writer, value._Enabled);
       RdProperty<string>.Write(ctx, writer, value._ControlId);
+      RdProperty<int>.Write(ctx, writer, value._UniqueId);
+      RdProperty<string>.Write(ctx, writer, value._DataId);
       RdProperty<string>.Write(ctx, writer, value._Tooltip);
       RdSignal<Unit>.Write(ctx, writer, value._Focus);
       RdProperty<JetBrains.Rider.Model.UIAutomation.ControlVisibility>.Write(ctx, writer, value._Visible);
@@ -265,6 +275,8 @@ namespace JetBrains.Rider.Model
         printer.Print("messageReceived = "); _MessageReceived.PrintEx(printer); printer.Println();
         printer.Print("enabled = "); _Enabled.PrintEx(printer); printer.Println();
         printer.Print("controlId = "); _ControlId.PrintEx(printer); printer.Println();
+        printer.Print("uniqueId = "); _UniqueId.PrintEx(printer); printer.Println();
+        printer.Print("dataId = "); _DataId.PrintEx(printer); printer.Println();
         printer.Print("tooltip = "); _Tooltip.PrintEx(printer); printer.Println();
         printer.Print("focus = "); _Focus.PrintEx(printer); printer.Println();
         printer.Print("visible = "); _Visible.PrintEx(printer); printer.Println();

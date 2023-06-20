@@ -9,6 +9,7 @@ import com.jetbrains.rd.util.lifetime.*
 import com.jetbrains.rd.util.reactive.*
 import com.jetbrains.rd.util.string.*
 import com.jetbrains.rd.util.*
+import kotlin.time.Duration
 import kotlin.reflect.KClass
 import kotlin.jvm.JvmStatic
 
@@ -43,10 +44,7 @@ class CefToolWindowModel private constructor(
         fun create(lifetime: Lifetime, protocol: IProtocol): CefToolWindowModel  {
             IdeRoot.register(protocol.serializers)
             
-            return CefToolWindowModel().apply {
-                identify(protocol.identity, RdId.Null.mix("CefToolWindowModel"))
-                bind(lifetime, protocol, "CefToolWindowModel")
-            }
+            return CefToolWindowModel()
         }
         
         
@@ -113,13 +111,17 @@ class BeCefToolWindowPanel private constructor(
     private val _sendMessage: RdCall<String, Unit>,
     private val _messageReceived: RdSignal<String>,
     _enabled: RdProperty<Boolean>,
-    _controlId: RdProperty<String>,
+    _controlId: RdProperty<@org.jetbrains.annotations.NonNls String>,
+    _uniqueId: RdOptionalProperty<Int>,
+    _dataId: RdProperty<String>,
     _tooltip: RdProperty<@org.jetbrains.annotations.Nls String?>,
     _focus: RdSignal<Unit>,
     _visible: RdOptionalProperty<com.jetbrains.ide.model.uiautomation.ControlVisibility>
 ) : com.jetbrains.ide.model.uiautomation.BeControl (
     _enabled,
     _controlId,
+    _uniqueId,
+    _dataId,
     _tooltip,
     _focus,
     _visible
@@ -133,7 +135,9 @@ class BeCefToolWindowPanel private constructor(
         override fun read(ctx: SerializationCtx, buffer: AbstractBuffer): BeCefToolWindowPanel  {
             val _id = RdId.read(buffer)
             val _enabled = RdProperty.read(ctx, buffer, FrameworkMarshallers.Bool)
-            val _controlId = RdProperty.read(ctx, buffer, FrameworkMarshallers.String)
+            val _controlId = RdProperty.read(ctx, buffer, __StringSerializer)
+            val _uniqueId = RdOptionalProperty.read(ctx, buffer, FrameworkMarshallers.Int)
+            val _dataId = RdProperty.read(ctx, buffer, FrameworkMarshallers.String)
             val _tooltip = RdProperty.read(ctx, buffer, __StringNullableSerializer)
             val _focus = RdSignal.read(ctx, buffer, FrameworkMarshallers.Void)
             val _visible = RdOptionalProperty.read(ctx, buffer, com.jetbrains.ide.model.uiautomation.ControlVisibility.marshaller)
@@ -144,13 +148,15 @@ class BeCefToolWindowPanel private constructor(
             val _getResource = RdCall.read(ctx, buffer, FrameworkMarshallers.String, FrameworkMarshallers.String)
             val _sendMessage = RdCall.read(ctx, buffer, FrameworkMarshallers.String, FrameworkMarshallers.Void)
             val _messageReceived = RdSignal.read(ctx, buffer, FrameworkMarshallers.String)
-            return BeCefToolWindowPanel(url, html, _openDevTools, _openUrl, _getResource, _sendMessage, _messageReceived, _enabled, _controlId, _tooltip, _focus, _visible).withId(_id)
+            return BeCefToolWindowPanel(url, html, _openDevTools, _openUrl, _getResource, _sendMessage, _messageReceived, _enabled, _controlId, _uniqueId, _dataId, _tooltip, _focus, _visible).withId(_id)
         }
         
         override fun write(ctx: SerializationCtx, buffer: AbstractBuffer, value: BeCefToolWindowPanel)  {
             value.rdid.write(buffer)
             RdProperty.write(ctx, buffer, value._enabled)
             RdProperty.write(ctx, buffer, value._controlId)
+            RdOptionalProperty.write(ctx, buffer, value._uniqueId)
+            RdProperty.write(ctx, buffer, value._dataId)
             RdProperty.write(ctx, buffer, value._tooltip)
             RdSignal.write(ctx, buffer, value._focus)
             RdOptionalProperty.write(ctx, buffer, value._visible)
@@ -163,6 +169,7 @@ class BeCefToolWindowPanel private constructor(
             RdSignal.write(ctx, buffer, value._messageReceived)
         }
         
+        private val __StringSerializer = FrameworkMarshallers.String
         private val __StringNullableSerializer = FrameworkMarshallers.String.nullable()
         
     }
@@ -201,6 +208,8 @@ class BeCefToolWindowPanel private constructor(
         RdCall<String, Unit>(FrameworkMarshallers.String, FrameworkMarshallers.Void),
         RdSignal<String>(FrameworkMarshallers.String),
         RdProperty<Boolean>(true, FrameworkMarshallers.Bool),
+        RdProperty<@org.jetbrains.annotations.NonNls String>("", __StringSerializer),
+        RdOptionalProperty<Int>(FrameworkMarshallers.Int),
         RdProperty<String>("", FrameworkMarshallers.String),
         RdProperty<@org.jetbrains.annotations.Nls String?>(null, __StringNullableSerializer),
         RdSignal<Unit>(FrameworkMarshallers.Void),
@@ -222,6 +231,8 @@ class BeCefToolWindowPanel private constructor(
             print("messageReceived = "); _messageReceived.print(printer); println()
             print("enabled = "); _enabled.print(printer); println()
             print("controlId = "); _controlId.print(printer); println()
+            print("uniqueId = "); _uniqueId.print(printer); println()
+            print("dataId = "); _dataId.print(printer); println()
             print("tooltip = "); _tooltip.print(printer); println()
             print("focus = "); _focus.print(printer); println()
             print("visible = "); _visible.print(printer); println()
@@ -240,6 +251,8 @@ class BeCefToolWindowPanel private constructor(
             _messageReceived.deepClonePolymorphic(),
             _enabled.deepClonePolymorphic(),
             _controlId.deepClonePolymorphic(),
+            _uniqueId.deepClonePolymorphic(),
+            _dataId.deepClonePolymorphic(),
             _tooltip.deepClonePolymorphic(),
             _focus.deepClonePolymorphic(),
             _visible.deepClonePolymorphic()
