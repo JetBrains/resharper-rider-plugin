@@ -76,13 +76,7 @@ public class CefToolWindowManager
             MessageBox.ShowInfo(value);
         });
 
-        panel.GetResource.Set((_, request) =>
-        {
-            var assembly = typeof(CefToolWindowManager).Assembly;
-            var path = new Uri(request).AbsolutePath.TrimStart('/').Replace("/", ".");
-            var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{path}");
-            return Task.FromResult(stream.ReadToEnd()).ToRdTask();
-        });
+        panel.GetResource.SetSync(GetResource);
 
         model.ActivateToolWindow.WhenTrue(lifetime, _ =>
         {
@@ -92,5 +86,13 @@ public class CefToolWindowManager
         });
 
         model.ToolWindowContent.SetValue(panelWithToolBar);
+    }
+
+    public static string GetResource(string request)
+    {
+        var assembly = typeof(CefToolWindowManager).Assembly;
+        var path = new Uri(request).AbsolutePath.TrimStart('/').Replace("/", ".");
+        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{path}");
+        return stream.ReadToEnd();
     }
 }

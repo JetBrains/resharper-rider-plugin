@@ -167,7 +167,7 @@ rdgen {
 
     generator {
         language = "csharp"
-        transform = "reversed"
+        transform = "symmetric"
         root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
         namespace = "JetBrains.Rider.Model"
         directory = "$csOutput"

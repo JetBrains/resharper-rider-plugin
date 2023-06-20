@@ -1,4 +1,4 @@
-#if RESHARPER && !WIN
+#if RESHARPER
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -9,7 +9,9 @@ using CefSharp;
 using CefSharp.Wpf;
 using JetBrains.Application.Threading;
 using JetBrains.Application.UI.Automation;
+using JetBrains.Core;
 using JetBrains.Lifetimes;
+using JetBrains.Rd.Tasks;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Rider.Model;
 using JetBrains.UI.SrcView.Automation;
@@ -64,10 +66,11 @@ public class CefToolWindowPanel : ViewControl<BeCefToolWindowPanel>
         };
 
         // ReSharper -> Web
-        automation.SendMessage.Advise(lifetime, message =>
+        automation.SendMessage.SetSync(message =>
         {
             var dispatchMessage = $"document.dispatchEvent({message})";
             browser.GetMainFrame().ExecuteJavaScriptAsync(dispatchMessage);
+            return Unit.Instance;
         });
 
         return browser;
