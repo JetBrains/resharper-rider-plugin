@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using JetBrains.Application.Resources;
 using JetBrains.Application.UI.Icons.CommonThemedIcons;
 using JetBrains.Application.UI.ToolWindowManagement;
 using JetBrains.Collections.Viewable;
@@ -91,7 +87,7 @@ public class CefToolWindowManager
     public static string GetResource(string request)
     {
         var assembly = typeof(CefToolWindowManager).Assembly;
-        var path = new Uri(request).AbsolutePath.TrimStart('/').Replace("/", ".");
+        var path = request.Replace("nuke://", "").Trim('/');
         var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{path}");
         return stream.ReadToEnd();
     }
