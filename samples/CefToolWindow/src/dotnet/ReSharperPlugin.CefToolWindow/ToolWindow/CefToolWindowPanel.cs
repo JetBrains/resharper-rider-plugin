@@ -1,8 +1,6 @@
 #if RESHARPER
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using CefSharp;
@@ -10,11 +8,13 @@ using CefSharp.Wpf;
 using JetBrains.Application.Threading;
 using JetBrains.Application.UI.Automation;
 using JetBrains.Core;
+using JetBrains.Diagnostics;
 using JetBrains.Lifetimes;
 using JetBrains.Rd.Tasks;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Rider.Model;
 using JetBrains.UI.SrcView.Automation;
+using JetBrains.Util.Logging;
 
 namespace ReSharperPlugin.CefToolWindow.ToolWindow;
 
@@ -85,9 +85,17 @@ public class ResourceSchemaHandler : ISchemeHandlerFactory
 {
     public IResourceHandler Create(IBrowser browser, IFrame frame, string schemeName, IRequest request)
     {
-        var resource = CefToolWindowManager.GetResource(request.Url);
-        var stream = new MemoryStream(Encoding.UTF8.GetBytes(resource));
-        return ResourceHandler.FromStream(stream);
+        try
+        {
+            var resource = CefToolWindowManager.GetResource(request.Url);
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(resource));
+            return ResourceHandler.FromStream(stream);
+        }
+        catch (Exception ex)
+        {
+            Logger.GetLogger<ResourceSchemaHandler>().Error(ex);
+            return null;
+        }
     }
 }
 #endif
