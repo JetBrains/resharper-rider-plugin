@@ -32,8 +32,8 @@ namespace ReSharperPlugin.DataContext
             var textControl = context.GetData(TextControlDataConstants.TEXT_CONTROL);
 
             // Unit Testing
-            var allElements = context.GetData(UnitTestDataConstants.Elements.ALL);
-            var selectedElements = context.GetData(UnitTestDataConstants.Elements.SELECTED);
+            var allElements = context.GetData(UnitTestDataConstants.TREE.Elements.All);
+            var selectedElements = context.GetData(UnitTestDataConstants.TREE.Elements.Selected);
             var currentSession = context.GetData(UnitTestDataConstants.Session.CURRENT);
 
             // UI
