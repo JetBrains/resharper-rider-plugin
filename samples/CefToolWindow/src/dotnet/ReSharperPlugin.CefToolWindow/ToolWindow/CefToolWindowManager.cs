@@ -1,4 +1,5 @@
 using JetBrains.Application.UI.Icons.CommonThemedIcons;
+using JetBrains.Application.UI.Options.Options.ThemedIcons;
 using JetBrains.Application.UI.ToolWindowManagement;
 using JetBrains.Collections.Viewable;
 using JetBrains.Diagnostics;
@@ -8,6 +9,7 @@ using JetBrains.Lifetimes;
 using JetBrains.ProjectModel;
 using JetBrains.Rd.Base;
 using JetBrains.Rd.Tasks;
+using JetBrains.ReSharper.ExternalSources.Resources;
 using JetBrains.ReSharper.Psi.Resources;
 using JetBrains.Rider.Model;
 using JetBrains.Util;
@@ -20,6 +22,9 @@ namespace ReSharperPlugin.CefToolWindow.ToolWindow;
 [SolutionComponent]
 public class CefToolWindowManager
 {
+    public const string Schema = "resharper-plugin";
+    public const string FileBaseUrl = $"{Schema}://";
+
     public CefToolWindowManager(
         ToolWindowManager toolWindowManager,
         CefToolWindowModel model,
@@ -31,39 +36,37 @@ public class CefToolWindowManager
 #if RESHARPER
         // CefSharp.CefRuntime.LoadCefSharpCoreRuntimeAnyCpu();
 #endif
-        var panel = new BeCefToolWindowPanel(url: "nuke:///index.html", html: null);
+        var panel = new BeCefToolWindowPanel(url: $"{FileBaseUrl}/index.html", html: null);
         var panelWithToolBar = panel
             .InToolbar()
             .AddItem(
                 BeControls.GetButton(
-                    iconHost.Transform(CommonThemedIcons.Refresh.Id),
-                    lifetime,
-                    onClick: () => { panel.ShowMessage("foooooobar!"); }))
+                        onClick: () => { panel.OpenUrl.Fire($"{FileBaseUrl}/index.html"); },
+                        icon: iconHost.Transform(AssemblyExplorerThemedIcons.FolderResourcesClosed.Id),
+                        lifetime: lifetime)
+                    .WithCustomTooltip(title: "Load embedded web page", text: null))
             .AddItem(
                 BeControls.GetButton(
-                    iconHost.Transform(CommonThemedIcons.Duplicate.Id),
-                    lifetime,
-                    onClick: () => { panel.OpenUrl.Fire("nuke:///index.html"); }))
+                        onClick: () => { panel.ShowMessage("Web page alert from IDE!"); },
+                        icon: iconHost.Transform(CommonThemedIcons.MessageInfo.Id),
+                        lifetime: lifetime)
+                    .WithCustomTooltip(title: "Send message to web page", text: null))
             .AddItem(
                 BeControls.GetButton(
-                    iconHost.Transform(BrowsersThemedIcons.BrowserChrome.Id),
-                    lifetime,
-                    onClick: () => panel.OpenUrl.Fire("https://google.com")))
-            // .AddItem(
-            //     BeControls.GetTextBox(
-            //         lifetime,
-            //         id: "textBox",
-            //         initialText: "initial text"))
+                        onClick: () => panel.OpenUrl.Fire("https://google.com"),
+                        icon: iconHost.Transform(BrowsersThemedIcons.BrowserSystemDefault.Id),
+                        lifetime: lifetime)
+                    .WithCustomTooltip(title: "Load google.com", text: null))
             .AddItem(
                 BeControls.GetComboBox(
                     lifetime,
                     values: new[] { "first", "second", "third" }))
             .AddItem(
                 BeControls.GetToggleButton(
-                    iconHost.Transform(CommonThemedIcons.Pin.Id),
-                    lifetime,
-                    "Toggle Button",
-                    onClick: value => panel.OpenDevTools.Fire(value)));
+                    tooltip: "Toggle CEF Dev Tools",
+                    onClick: value => panel.OpenDevTools.Fire(value),
+                    icon: iconHost.Transform(OptionsThemedIcons.Options.Id),
+                    lifetime: lifetime));
 
         panel.MessageReceived.Advise(lifetime, message =>
         {
@@ -87,7 +90,7 @@ public class CefToolWindowManager
     public static string GetResource(string request)
     {
         var assembly = typeof(CefToolWindowManager).Assembly;
-        var path = request.Replace("nuke://", "").Trim('/');
+        var path = request.TrimFromStart(FileBaseUrl).Trim('/');
         var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{path}");
         return stream.ReadToEnd();
     }
