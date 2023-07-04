@@ -16,6 +16,7 @@ jobs:
         sample: [
           'CodeInspections',
           'ContextActions',
+          'InlayHints',
           'PostfixTemplates'
         ]
     runs-on: windows-latest
