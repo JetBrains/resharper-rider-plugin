@@ -129,8 +129,8 @@ namespace JetBrains.Rider.Model
     [CanBeNull] public string Html {get; private set;}
     [NotNull] public ISignal<bool> OpenDevTools => _OpenDevTools;
     [NotNull] public ISignal<string> OpenUrl => _OpenUrl;
-    [NotNull] public IRdEndpoint<string, string> GetResource => _GetResource;
-    [NotNull] public IRdCall<string, Unit> SendMessage => _SendMessage;
+    [NotNull] public RdCall<string, string> GetResource => _GetResource;
+    [NotNull] public RdCall<string, Unit> SendMessage => _SendMessage;
     [NotNull] public ISignal<string> MessageReceived => _MessageReceived;
     
     //private fields

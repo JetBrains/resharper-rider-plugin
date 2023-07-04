@@ -18,6 +18,8 @@ import org.cef.network.CefResponse
 import java.io.IOException
 import javax.swing.JComponent
 
+private const val SCHEMA = "resharper-plugin"
+
 class CefToolWindowPanel : ViewBinder<BeCefToolWindowPanel>
 {
     override fun bind(viewModel: BeCefToolWindowPanel, lifetime: Lifetime): JComponent {
@@ -38,7 +40,7 @@ class CefToolWindowPanel : ViewBinder<BeCefToolWindowPanel>
         }
 
 
-        CefApp.getInstance().registerSchemeHandlerFactory("nuke", "*") { _, _, _, request ->
+        CefApp.getInstance().registerSchemeHandlerFactory(SCHEMA, "*") { _, _, _, request ->
             val resource = viewModel.getResource.sync(request.url)
             val stream = resource.byteInputStream()
 

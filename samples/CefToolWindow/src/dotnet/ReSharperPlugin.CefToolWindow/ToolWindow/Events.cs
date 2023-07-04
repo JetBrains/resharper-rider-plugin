@@ -5,7 +5,7 @@ namespace ReSharperPlugin.CefToolWindow.ToolWindow;
 
 public interface ICustomEventData { }
 
-public record ShowMessage(string message) : ICustomEventData;
+public record ShowMessage(string Message) : ICustomEventData;
 
 public static class BeCefToolWindowPanelExtensions
 {

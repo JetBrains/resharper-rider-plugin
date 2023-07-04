@@ -8,6 +8,7 @@
     <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CefSharpBuildAction>None</CefSharpBuildAction>
+    <UseWpf>true</UseWpf>
   </PropertyGroup>
 
   <ItemGroup>
