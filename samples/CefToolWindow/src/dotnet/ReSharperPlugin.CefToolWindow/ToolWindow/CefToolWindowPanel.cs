@@ -27,7 +27,7 @@ public class CefToolWindowPanel : ViewControl<BeCefToolWindowPanel>
         var settings = new CefSettings { BrowserSubprocessPath = executable };
         settings.RegisterScheme(new CefCustomScheme
         {
-            SchemeName = "nuke",
+            SchemeName = CefToolWindowManager.Schema,
             SchemeHandlerFactory = new ResourceSchemaHandler()
         });
         Cef.Initialize(settings); // on UI thread!
@@ -40,7 +40,7 @@ public class CefToolWindowPanel : ViewControl<BeCefToolWindowPanel>
         lifetime.AddDispose(browser);
 
         automation.OpenDevTools.Advise(lifetime, _ => browser.ShowDevTools());
-        automation.OpenUrl.Advise(lifetime, browser.Load);
+        automation.OpenUrl.Advise(lifetime, x => browser.Load(x));
 
         // Web -> ReSharper
         browser.LoadingStateChanged += (_, _) =>
