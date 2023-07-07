@@ -44,19 +44,19 @@ public class CefToolWindowManager
                         onClick: () => { panel.OpenUrl.Fire($"{FileBaseUrl}/index.html"); },
                         icon: iconHost.Transform(AssemblyExplorerThemedIcons.FolderResourcesClosed.Id),
                         lifetime: lifetime)
-                    .WithCustomTooltip(title: "Load embedded web page", text: null))
+                    .WithCustomTooltip(title: "Load embedded web page", text: string.Empty))
             .AddItem(
                 BeControls.GetButton(
                         onClick: () => { panel.ShowMessage("Web page alert from IDE!"); },
                         icon: iconHost.Transform(CommonThemedIcons.MessageInfo.Id),
                         lifetime: lifetime)
-                    .WithCustomTooltip(title: "Send message to web page", text: null))
+                    .WithCustomTooltip(title: "Send message to web page", text: string.Empty))
             .AddItem(
                 BeControls.GetButton(
                         onClick: () => panel.OpenUrl.Fire("https://google.com"),
                         icon: iconHost.Transform(BrowsersThemedIcons.BrowserSystemDefault.Id),
                         lifetime: lifetime)
-                    .WithCustomTooltip(title: "Load google.com", text: null))
+                    .WithCustomTooltip(title: "Load google.com", text: string.Empty))
             .AddItem(
                 BeControls.GetComboBox(
                     lifetime,
