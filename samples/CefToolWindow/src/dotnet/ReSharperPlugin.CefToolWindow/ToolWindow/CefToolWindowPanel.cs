@@ -23,7 +23,8 @@ public class CefToolWindowPanel : ViewControl<BeCefToolWindowPanel>
 {
     protected override UIElement OnRenderView(Lifetime lifetime, BeCefToolWindowPanel automation)
     {
-        var executable = Path.Combine(Path.GetDirectoryName(typeof(CefToolWindowPanel).Assembly.Location), "CefSharp.BrowserSubprocess.exe");
+        var assemblyDirectory = Path.GetDirectoryName(typeof(CefToolWindowPanel).Assembly.Location).NotNull();
+        var executable = Path.Combine(assemblyDirectory, "CefSharp.BrowserSubprocess.exe");
         var settings = new CefSettings { BrowserSubprocessPath = executable };
         settings.RegisterScheme(new CefCustomScheme
         {
@@ -45,12 +46,14 @@ public class CefToolWindowPanel : ViewControl<BeCefToolWindowPanel>
         // Web -> ReSharper
         browser.LoadingStateChanged += (_, _) =>
         {
-            var script = @"if (!messageSentEvent) {
-                             var messageSentEvent = new Event('messageSentEvent');
-                             document.addEventListener('messageSentEvent', (message) => {
-                                 CefSharp.PostMessage(JSON.stringify(message.detail));
-                             });
-                           }";
+            var script = """
+                if (!messageSentEvent) {
+                    var messageSentEvent = new Event('messageSentEvent');
+                    document.addEventListener('messageSentEvent', (message) => {
+                        CefSharp.PostMessage(JSON.stringify(message.detail));
+                    });
+                }
+                """;
 
             browser.GetMainFrame().ExecuteJavaScriptAsync(script);
         };
@@ -88,7 +91,7 @@ public class ResourceSchemaHandler : ISchemeHandlerFactory
         try
         {
             var resource = CefToolWindowManager.GetResource(request.Url);
-            var stream = new MemoryStream(Encoding.UTF8.GetBytes(resource));
+            var stream = new MemoryStream(resource);
             return ResourceHandler.FromStream(stream);
         }
         catch (Exception ex)

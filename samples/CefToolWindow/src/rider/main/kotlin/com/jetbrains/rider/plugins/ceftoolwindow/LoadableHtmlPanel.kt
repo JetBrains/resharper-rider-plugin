@@ -17,6 +17,7 @@ import org.cef.network.CefRequest
 import java.awt.BorderLayout
 import javax.swing.JComponent
 
+// https://github.com/docToolchain/diagrams.net-intellij-plugin/blob/main/src/main/kotlin/de/docs_as_co/intellij/plugin/drawio/utils/LoadableJCEFHtmlPanel.kt
 class LoadableHtmlPanel(
     url: String? = null, html: String? = null,
     var timeoutCallback: String? = EditorBundle.message("message.html.editor.timeout")

@@ -76,7 +76,7 @@ namespace JetBrains.Rider.Model
     
     
     
-    protected override long SerializationHash => -2409565546485374679L;
+    protected override long SerializationHash => -8542480836667176690L;
     
     protected override Action<ISerializers> Register => RegisterDeclaredTypesSerializers;
     public static void RegisterDeclaredTypesSerializers(ISerializers serializers)
@@ -129,14 +129,14 @@ namespace JetBrains.Rider.Model
     [CanBeNull] public string Html {get; private set;}
     [NotNull] public ISignal<bool> OpenDevTools => _OpenDevTools;
     [NotNull] public ISignal<string> OpenUrl => _OpenUrl;
-    [NotNull] public RdCall<string, string> GetResource => _GetResource;
+    [NotNull] public RdCall<string, byte[]> GetResource => _GetResource;
     [NotNull] public RdCall<string, Unit> SendMessage => _SendMessage;
     [NotNull] public ISignal<string> MessageReceived => _MessageReceived;
     
     //private fields
     [NotNull] private readonly RdSignal<bool> _OpenDevTools;
     [NotNull] private readonly RdSignal<string> _OpenUrl;
-    [NotNull] private readonly RdCall<string, string> _GetResource;
+    [NotNull] private readonly RdCall<string, byte[]> _GetResource;
     [NotNull] private readonly RdCall<string, Unit> _SendMessage;
     [NotNull] private readonly RdSignal<string> _MessageReceived;
     
@@ -146,7 +146,7 @@ namespace JetBrains.Rider.Model
       [CanBeNull] string html,
       [NotNull] RdSignal<bool> openDevTools,
       [NotNull] RdSignal<string> openUrl,
-      [NotNull] RdCall<string, string> getResource,
+      [NotNull] RdCall<string, byte[]> getResource,
       [NotNull] RdCall<string, Unit> sendMessage,
       [NotNull] RdSignal<string> messageReceived,
       [NotNull] RdProperty<bool> enabled,
@@ -197,7 +197,7 @@ namespace JetBrains.Rider.Model
       html,
       new RdSignal<bool>(JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool),
       new RdSignal<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString),
-      new RdCall<string, string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString),
+      new RdCall<string, byte[]>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadByteArray, JetBrains.Rd.Impl.Serializers.WriteByteArray),
       new RdCall<string, Unit>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadVoid, JetBrains.Rd.Impl.Serializers.WriteVoid),
       new RdSignal<string>(JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString),
       new RdProperty<bool>(JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool, true),
@@ -225,7 +225,7 @@ namespace JetBrains.Rider.Model
       var html = ReadStringNullable(ctx, reader);
       var openDevTools = RdSignal<bool>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadBool, JetBrains.Rd.Impl.Serializers.WriteBool);
       var openUrl = RdSignal<string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
-      var getResource = RdCall<string, string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
+      var getResource = RdCall<string, byte[]>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadByteArray, JetBrains.Rd.Impl.Serializers.WriteByteArray);
       var sendMessage = RdCall<string, Unit>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString, JetBrains.Rd.Impl.Serializers.ReadVoid, JetBrains.Rd.Impl.Serializers.WriteVoid);
       var messageReceived = RdSignal<string>.Read(ctx, reader, JetBrains.Rd.Impl.Serializers.ReadString, JetBrains.Rd.Impl.Serializers.WriteString);
       var _result = new BeCefToolWindowPanel(url, html, openDevTools, openUrl, getResource, sendMessage, messageReceived, enabled, controlId, uniqueId, dataId, tooltip, focus, visible).WithId(_id);
@@ -248,7 +248,7 @@ namespace JetBrains.Rider.Model
       WriteStringNullable(ctx, writer, value.Html);
       RdSignal<bool>.Write(ctx, writer, value._OpenDevTools);
       RdSignal<string>.Write(ctx, writer, value._OpenUrl);
-      RdCall<string, string>.Write(ctx, writer, value._GetResource);
+      RdCall<string, byte[]>.Write(ctx, writer, value._GetResource);
       RdCall<string, Unit>.Write(ctx, writer, value._SendMessage);
       RdSignal<string>.Write(ctx, writer, value._MessageReceived);
     };

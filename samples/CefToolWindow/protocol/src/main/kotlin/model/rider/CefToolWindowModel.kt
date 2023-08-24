@@ -25,7 +25,7 @@ object CefToolWindowModel : Ext(IdeRoot) {
             signal("openDevTools", bool)
             signal("openUrl", string)
 
-            call("getResource", string, string).async
+            call("getResource", string, array(byte)).async
 
             callback("sendMessage", string, void).async
             source("messageReceived", string).async

@@ -42,7 +42,8 @@ class CefToolWindowPanel : ViewBinder<BeCefToolWindowPanel>
 
         CefApp.getInstance().registerSchemeHandlerFactory(SCHEMA, "*") { _, _, _, request ->
             val resource = viewModel.getResource.sync(request.url)
-            val stream = resource.byteInputStream()
+            val stream = resource.inputStream()
+            val url = request.url
 
             object : CefResourceHandler {
 
@@ -53,7 +54,16 @@ class CefToolWindowPanel : ViewBinder<BeCefToolWindowPanel>
                 }
 
                 override fun getResponseHeaders(response: CefResponse, response_length: IntRef, redirectUrl: StringRef?) {
-                    response.mimeType = "text/html"
+                    response.mimeType = when {
+                        url.endsWith(".html") -> "text/html"
+                        url.endsWith(".css") -> "text/css"
+                        url.endsWith(".svg") -> "image/svg+xml"
+                        url.endsWith(".png") -> "image/png"
+                        url.endsWith(".jpg") -> "image/jpeg"
+                        url.endsWith(".jpeg") -> "image/jpeg"
+                        url.endsWith(".js") -> "application/javascript"
+                        else -> "text/plain"
+                    }
                     response.status = 200
                 }
 

@@ -23,7 +23,7 @@ namespace ReSharperPlugin.CefToolWindow.ToolWindow;
 public class CefToolWindowManager
 {
     public const string Schema = "resharper-plugin";
-    public const string FileBaseUrl = $"{Schema}://";
+    public const string BaseUrl = $"{Schema}://home";
 
     public CefToolWindowManager(
         ToolWindowManager toolWindowManager,
@@ -36,12 +36,12 @@ public class CefToolWindowManager
 #if RESHARPER
         // CefSharp.CefRuntime.LoadCefSharpCoreRuntimeAnyCpu();
 #endif
-        var panel = new BeCefToolWindowPanel(url: $"{FileBaseUrl}/index.html", html: null);
+        var panel = new BeCefToolWindowPanel(url: $"{BaseUrl}/index.html", html: null);
         var panelWithToolBar = panel
             .InToolbar()
             .AddItem(
                 BeControls.GetButton(
-                        onClick: () => { panel.OpenUrl.Fire($"{FileBaseUrl}/index.html"); },
+                        onClick: () => { panel.OpenUrl.Fire($"{BaseUrl}/index.html"); },
                         icon: iconHost.Transform(AssemblyExplorerThemedIcons.FolderResourcesClosed.Id),
                         lifetime: lifetime)
                     .WithCustomTooltip(title: "Load embedded web page", text: string.Empty))
@@ -87,11 +87,11 @@ public class CefToolWindowManager
         model.ToolWindowContent.SetValue(panelWithToolBar);
     }
 
-    public static string GetResource(string request)
+    public static byte[] GetResource(string request)
     {
         var assembly = typeof(CefToolWindowManager).Assembly;
-        var path = request.TrimFromStart(FileBaseUrl).Trim('/');
+        var path = request.TrimFromStart(BaseUrl).Trim('/');
         var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{path}");
-        return stream.ReadToEnd();
+        return stream.ReadAllBytes();
     }
 }
