@@ -7,6 +7,21 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace ReSharperPlugin.InlayHints;
 
+/*
+using Xunit;
+
+namespace ClassLibrary2;
+
+public class Class1
+{
+    [Theory]
+    [InlineData("a", 4)] // <-- on push-to-hint
+    public void Test(string a, int b)
+    {
+    }
+}
+*/
+
 [ElementProblemAnalyzer(
     typeof(IAttribute),
     HighlightingTypes = new[] { typeof(SampleInlayHint) })]

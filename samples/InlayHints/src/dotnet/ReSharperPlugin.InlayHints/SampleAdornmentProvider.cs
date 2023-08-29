@@ -1,18 +1,18 @@
 using JetBrains.ProjectModel;
 using JetBrains.TextControl.DocumentMarkup;
-using JetBrains.TextControl.DocumentMarkup.IntraTextAdornments;
+using JetBrains.TextControl.DocumentMarkup.Adornments;
 
 namespace ReSharperPlugin.InlayHints;
 
 [SolutionComponent]
-public class SampleAdornmentProvider : IHighlighterIntraTextAdornmentProvider
+public class SampleAdornmentProvider : IHighlighterAdornmentProvider
 {
     public bool IsValid(IHighlighter highlighter)
     {
         return highlighter.UserData is SampleInlayHintBase;
     }
 
-    public IIntraTextAdornmentDataModel CreateDataModel(IHighlighter highlighter)
+    public IAdornmentDataModel CreateDataModel(IHighlighter highlighter)
     {
         return highlighter.UserData is SampleInlayHint hint
             ? new SampleAdornmentDataModel(hint.ParameterName)

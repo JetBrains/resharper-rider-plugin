@@ -24,7 +24,7 @@ namespace ReSharperPlugin.InlayHints;
     VsGenerateClassificationDefinition = VsGenerateDefinition.VisibleClassification,
     VsBaseClassificationType = VsPredefinedClassificationType.Text,
     TransmitUpdates = true)]
-[DaemonIntraTextAdornmentProvider(typeof(SampleAdornmentProvider))]
+[DaemonAdornmentProvider(typeof(SampleAdornmentProvider))]
 [DaemonTooltipProvider(typeof(InlayHintTooltipProvider))]
 [StaticSeverityHighlighting(Severity.INFO, typeof(HighlightingGroupIds.CodeInsights), AttributeId = HighlightAttributeId)]
 public class SampleInlayHint : SampleInlayHintBase
