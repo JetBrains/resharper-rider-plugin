@@ -13,6 +13,7 @@
   </description>
 
   <actions resource-bundle="messages.RiderPluginActionsBundle">
+    <!-- The ids used here are only relevant for bundle properties and frontend testing -->
     <action id="Sample" class="com.jetbrains.rider.plugins.samples.actions.SampleAction">
       <keyboard-shortcut keymap="$default" first-keystroke="shift control I"/>
       <keyboard-shortcut keymap="Visual Studio" first-keystroke="shift control I"/>
