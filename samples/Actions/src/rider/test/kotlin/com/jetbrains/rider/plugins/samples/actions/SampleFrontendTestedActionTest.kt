@@ -15,7 +15,7 @@ class SampleFrontendTestedActionTest : BaseTestWithSolution() {
         val testFile = activeSolutionDirectory.resolve("file.txt")
         testFile.isFile.shouldBeFalse("Test file should not exist before test")
 
-        callAction(project, "SampleFrontendTestedAction")
+        callAction(project, "SampleFrontendTested")
 
         testFile.isFile.shouldBeTrue("Test file should be created by the action")
     }
