@@ -4,6 +4,7 @@
 - [SampleAction.kt](src/rider/main/kotlin/com/jetbrains/rider/plugins/samples/actions/SampleAction.kt)
 - [plugin.xml](src/rider/main/resources/META-INF/plugin.xml)
 - [Resources.resx](src/dotnet/ReSharperPlugin.Actions/Resources.resx)
+- [RiderActionsBundle.properties](src/rider/main/resources/messages/RiderActionsBundle.properties)
 
 ## Test Related
 
