@@ -18,6 +18,9 @@ Afterwards, a new project can be created from the installed template. The `name`
 dotnet new resharper-rider-plugin --name MyAwesomePlugin [--resharper-only] [--build-only]
 ```
 
+> **Warning**<br/>
+> The template comes with its own solution file. Therefore, it MUST be used from the command-line as shown above.
+
 This will create a new folder with all the structure ready to go and all identifiers, like namespaces, ids and file names, replaced with `MyAwesomePlugin`. Passing `--resharper-only` will exclude all Rider related files. With the `--build-only --force`, all the build-relevant files can be updated (some reverts are most likely necessary). Metadata including project website, description, author and others should be entered in `Plugin.props` and `plugins.xml`.
 
 
