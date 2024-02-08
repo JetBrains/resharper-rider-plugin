@@ -59,6 +59,11 @@ If your Rider plugin requires a [model](https://www.jetbrains.com/help/resharper
 gradlew :rdgen
 ```
 
+Debbuging your plugin requires your debugger to be attached to the corresponding IDE process. You can find the correct process by searching for `Backend` when running your extension in Rider, or `devenv` for Visual Studio. Read more about attaching here:
+
+- [Attach to process in Rider](https://www.jetbrains.com/help/rider/Attaching_to_Local_Process.html)
+- [Attach to process in Visual Studio](https://learn.microsoft.com/en-us/visualstudio/debugger/attach-to-running-processes-with-the-visual-studio-debugger)
+
 Opening the solution in Rider or IntelliJ IDEA will automatically provide the corresponding [run configurations](https://www.jetbrains.com/help/rider/Creating_and_Editing_Run_Debug_Configurations.html):
 
 <img src="./images/run-configurations.png" width="400" />
