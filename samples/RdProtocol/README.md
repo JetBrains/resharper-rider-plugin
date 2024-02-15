@@ -1,6 +1,6 @@
 # Relevant Files
 
-- [RdProtocolModel.kt](src/main/kotlin/model/rider/RdProtocolModel.kt)
+- [RdProtocolModel.kt](protocol/src/main/kotlin/model/rider/RdProtocolModel.kt)
 - [Component.cs](src/dotnet/ReSharperPlugin.RdProtocol/Rider/Component.cs)
 - [Component.kt](src/rider/main/kotlin/com/jetbrains/rider/plugins/rdprotocol/Component.kt)
 
