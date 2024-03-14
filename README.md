@@ -9,7 +9,7 @@ This repository defines a template for easy development of ReSharper and Rider p
 Download the `JetBrains.ReSharper.SamplePlugin.*.nupkg` template package from the [releases page](https://github.com/JetBrains/resharper-rider-plugin/releases) and invoke from the download directory:
 
 ```
-dotnet new --install JetBrains.ReSharper.SamplePlugin.*.nupkg
+dotnet new install JetBrains.ReSharper.SamplePlugin.*.nupkg
 ```
 
 Afterwards, a new project can be created from the installed template. The `name` identifier should be letters-only:
