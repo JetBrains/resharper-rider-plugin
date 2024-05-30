@@ -1,5 +1,4 @@
 using JetBrains.Application.UI.ToolWindowManagement;
-using JetBrains.Application.UI.UIAutomation;
 using JetBrains.Lifetimes;
 using JetBrains.ProjectModel;
 using JetBrains.Rider.Model;
@@ -32,11 +31,7 @@ public class CefToolWindow
         _myToolWindowClass.RegisterInstance(_myLifetime,
             title: null,
             icon: null,
-            (lifetime, _) =>
-            {
-                var model = _mySolution.GetComponent<CefToolWindowModel>();
-                return EitherControl.FromAutomation(lifetime, model.ToolWindowContent.Value);
-            });
+            (_, _) => _mySolution.GetComponent<CefToolWindowModel>().ToolWindowContent.Value);
     }
 
     public void ShowToolWindow()

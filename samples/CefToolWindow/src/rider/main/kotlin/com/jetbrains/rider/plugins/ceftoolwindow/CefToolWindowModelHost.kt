@@ -17,11 +17,9 @@ class CefToolWindowModelHost(project: Project) : ProtocolSubscribedProjectCompon
         }
     }
 
-    public val interactionModel: CefToolWindowModel
+    public val interactionModel: CefToolWindowModel = project.protocol.cefToolWindowModel
 
     init {
-
-        interactionModel = project.protocol.cefToolWindowModel
         interactionModel.activateToolWindow.change.advise(projectComponentLifetime) {
             if (!it) return@advise
 

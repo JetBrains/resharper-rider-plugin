@@ -29,9 +29,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="*.DotSettings" />
-    <EmbeddedResource Update="*.resx">
-      <Generator>JetResourceGenerator</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemDefinitionGroup>

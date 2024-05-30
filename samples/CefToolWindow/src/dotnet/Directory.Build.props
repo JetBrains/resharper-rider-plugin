@@ -34,4 +34,10 @@
     <EmbeddedResource Include="..\..\web\**\*" Visible="false" />
   </ItemGroup>
 
+  <ItemDefinitionGroup>
+    <EmbeddedResource>
+      <Generator>JetResourceGenerator</Generator>
+    </EmbeddedResource>
+  </ItemDefinitionGroup>
+
 </Project>
