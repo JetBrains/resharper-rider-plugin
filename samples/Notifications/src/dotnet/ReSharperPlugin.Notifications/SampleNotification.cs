@@ -22,7 +22,7 @@ internal class SampleNotification
 
         scheduler.EnqueueTask(
             new SolutionLoadTask(
-                name: $"{nameof(SampleNotification)}::init",
+                source: typeof(SampleNotification),
                 kind: SolutionLoadTaskKinds.AsLateAsPossible,
                 action: ShowNotification));
     }

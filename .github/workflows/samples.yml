@@ -19,6 +19,7 @@ jobs:
           'CodeVision',
           'ContextActions',
           'InlayHints',
+          'Notifications',
           'PostfixTemplates'
         ]
     runs-on: windows-latest

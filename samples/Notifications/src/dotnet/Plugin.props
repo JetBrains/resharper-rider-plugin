@@ -1,7 +1,7 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <SdkVersion>2023.3.0</SdkVersion>
+    <SdkVersion>2024.1.0</SdkVersion>
 
     <Title>ReSharper SDK – Notifications</Title>
     <Description>Shows a notification after solution load.</Description>
