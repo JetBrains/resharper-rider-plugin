@@ -12,10 +12,8 @@
     <OutputPath>bin\$(MSBuildProjectName)\$(Configuration)\</OutputPath>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DefineConstants Condition="'$(Configuration)'=='Debug'">TRACE;DEBUG;JET_MODE_ASSERT</DefineConstants>
-    <DefineConstants Condition="'$(OS)' == 'Windows_NT'">$(DefineConstants);WIN</DefineConstants>
-    <DefineConstants Condition="'$(OS)' != 'Windows_NT'">$(DefineConstants);UNIX</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT</DefineConstants>
   </PropertyGroup>
 
   <Import Project="Plugin.props" />

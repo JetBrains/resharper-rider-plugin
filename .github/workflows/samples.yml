@@ -16,6 +16,7 @@ jobs:
         sample: [
           'CefToolWindow',
           'CodeInspections',
+          'CodeVision',
           'ContextActions',
           'InlayHints',
           'PostfixTemplates'
