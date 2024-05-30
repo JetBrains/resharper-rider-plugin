@@ -1,3 +1,7 @@
+This sample shows how [Tool Windows](https://www.jetbrains.com/help/rider/Tool_Windows.html) are implemented using [Chrome Embedded Framework](https://github.com/chromiumembedded).
+
+![Sample](sample.png)
+
 # Relevant Files
 
 - [CefToolWindowManager.cs (toolbar + actions)](src/dotnet/ReSharperPlugin.CefToolWindow/ToolWindow/CefToolWindowManager.cs)
