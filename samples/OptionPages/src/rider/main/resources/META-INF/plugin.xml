@@ -17,7 +17,9 @@
     <applicationConfigurable
             parentId="tools"
             instance="com.jetbrains.rider.plugins.samples.options.SamplePage"
-            id="SamplePage" />
+            id="SamplePage"
+            bundle="messages.OptionPagesBundle"
+            key="configurable.name.optionpages.options.title" />
   </extensions>
 
 </idea-plugin>

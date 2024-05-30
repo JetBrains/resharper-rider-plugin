@@ -20,6 +20,7 @@ jobs:
           'ContextActions',
           'InlayHints',
           'Notifications',
+          'OptionPages',
           'PostfixTemplates'
         ]
     runs-on: windows-latest
