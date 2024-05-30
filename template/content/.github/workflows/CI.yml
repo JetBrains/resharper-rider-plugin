@@ -6,10 +6,10 @@ jobs:
   Build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             build/gradle-jvm
@@ -18,7 +18,7 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-Build-${{ hashFiles('gradlew.bat', 'src/dotnet/*/*.csproj', 'src/dotnet/*.props', 'gradle-wrapper.properties') }}
       - run: ./gradlew :buildPlugin --no-daemon
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ${{ github.event.repository.name }}.CI.${{ github.ref_name }}
@@ -26,10 +26,10 @@ jobs:
   Test:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             build/gradle-jvm
