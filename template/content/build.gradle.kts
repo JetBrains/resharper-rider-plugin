@@ -1,23 +1,18 @@
-// Reference https://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/gradle_guide.html
+import com.jetbrains.plugin.structure.base.utils.isFile
 import groovy.ant.FileNameFinder
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.jetbrains.intellij.platform.gradle.Constants
 import java.io.ByteArrayOutputStream
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.0.0"
-    id("org.jetbrains.intellij") version "1.17.3"     // See https://github.com/JetBrains/gradle-intellij-plugin/releases
-    id("com.jetbrains.rdgen") version "2024.1.1"      // See https://github.com/JetBrains/rd/releases
+    alias(libs.plugins.kotlinJvm)
+    id("org.jetbrains.intellij.platform") version "2.0.0-beta5"     // See https://github.com/JetBrains/intellij-platform-gradle-plugin/releases
     id("me.filippov.gradle.jvm.wrapper") version "0.14.0"
 }
 
 val isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
-val rdLibDirectory: () -> File = {
-    File(tasks.setupDependencies.get().idea.get().classes, "lib/rd")
-}
-
 extra["isWindows"] = isWindows
-extra["rdLibDirectory"] = rdLibDirectory
 
 val DotnetSolution: String by project
 val BuildConfiguration: String by project
@@ -26,9 +21,17 @@ val DotnetPluginId: String by project
 val RiderPluginId: String by project
 val PublishToken: String by project
 
+allprojects {
+    repositories {
+        maven { setUrl("https://cache-redirector.jetbrains.com/maven-central") }
+    }
+}
+
 repositories {
-    maven { setUrl("https://cache-redirector.jetbrains.com/intellij-repository/snapshots") }
-    maven { setUrl("https://cache-redirector.jetbrains.com/maven-central") }
+    intellijPlatform {
+        defaultRepositories()
+        jetbrainsRuntime()
+    }
 }
 
 tasks.wrapper {
@@ -151,43 +154,6 @@ dependencies {
 tasks.runIde {
     // Match Rider's default heap size of 1.5Gb (default for runIde is 512Mb)
     maxHeapSize = "1500m"
-
-    // Rider's backend doesn't support dynamic plugins. It might be possible to work with auto-reload of the frontend
-    // part of a plugin, but there are dangers about keeping plugins in sync
-    autoReloadPlugins.set(false)
-
-    // gradle-intellij-plugin will download the default version of the JBR for the snapshot. Update if required
-    // jbrVersion = "jbr_jcef-11_0_6b765.40" // https://confluence.jetbrains.com/display/JBR/Release+notes
-}
-
-rdgen {
-    val modelDir = File(rootDir, "protocol/src/main/kotlin/model")
-    val csOutput = File(rootDir, "src/dotnet/${DotnetPluginId}/Rider")
-    val ktOutput = File(rootDir, "src/rider/main/kotlin/${RiderPluginId.replace('.','/').toLowerCase()}")
-
-    verbose = true
-    classpath({
-        "${rdLibDirectory()}/rider-model.jar"
-    })
-    sources("${modelDir}/rider")
-    hashFolder = "${buildDir}"
-    packages = "model.rider"
-
-    generator {
-        language = "kotlin"
-        transform = "asis"
-        root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
-        namespace = "com.jetbrains.rider.model"
-        directory = "$ktOutput"
-    }
-
-    generator {
-        language = "csharp"
-        transform = "reversed"
-        root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
-        namespace = "JetBrains.Rider.Model"
-        directory = "$csOutput"
-    }
 }
 
 tasks.patchPluginXml {
@@ -235,5 +201,22 @@ tasks.publishPlugin {
             args("nuget","push","output/${DotnetPluginId}.${version}.nupkg","--api-key","${PublishToken}","--source","https://plugins.jetbrains.com")
             workingDir(rootDir)
         }
+    }
+}
+
+val riderModel: Configuration by configurations.creating {
+    isCanBeConsumed = true
+    isCanBeResolved = false
+}
+
+artifacts {
+    add(riderModel.name, provider {
+        intellijPlatform.platformPath.resolve("lib/rd/rider-model.jar").also {
+            check(it.isFile) {
+                "rider-model.jar is not found at $riderModel"
+            }
+        }
+    }) {
+        builtBy(Constants.Tasks.INITIALIZE_INTELLIJ_PLATFORM_PLUGIN)
     }
 }
