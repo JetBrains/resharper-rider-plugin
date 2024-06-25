@@ -15,6 +15,7 @@ ProjectSection(SolutionItems) = preProject
 	CHANGELOG.md = CHANGELOG.md
 #if (!resharper-only)
 	src\rider\main\resources\META-INF\plugin.xml = src\rider\main\resources\META-INF\plugin.xml
+	build.gradle.kts = build.gradle.kts
 	gradle.properties = gradle.properties
 #endif
 EndProjectSection
