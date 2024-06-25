@@ -1,7 +1,7 @@
 // Reference https://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/gradle_guide.html
+import groovy.ant.FileNameFinder
 import org.apache.tools.ant.taskdefs.condition.Os
 import java.io.ByteArrayOutputStream
-import groovy.ant.FileNameFinder
 
 plugins {
     id("java")
@@ -32,7 +32,7 @@ repositories {
 }
 
 tasks.wrapper {
-    gradleVersion = "7.6"
+    gradleVersion = "8.8"
     distributionType = Wrapper.DistributionType.ALL
     distributionUrl = "https://cache-redirector.jetbrains.com/services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
