@@ -14,6 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         sample: [
+          'Actions',
           'CefToolWindow',
           'CodeInspections',
           'CodeVision',
@@ -25,6 +26,11 @@ jobs:
         ]
     runs-on: windows-latest
     steps:
+      - uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          large-packages: false
+          dotnet: false
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:

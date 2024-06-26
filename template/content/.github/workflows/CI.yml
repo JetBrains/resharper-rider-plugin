@@ -6,6 +6,11 @@ jobs:
   Build:
     runs-on: windows-latest
     steps:
+      - uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          large-packages: false
+          dotnet: false
       - uses: actions/checkout@v4
         with:
           submodules: recursive
