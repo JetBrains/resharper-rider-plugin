@@ -3,10 +3,11 @@ using JetBrains.Application;
 using JetBrains.Application.Settings;
 using JetBrains.Diagnostics;
 using JetBrains.Lifetimes;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
 
 namespace ReSharperPlugin.SettingsProvider;
 
-[ShellComponent]
+[DefaultSettings(typeof (LiveTemplatesSettings))] // TODO: update with proper settings key type
 public class SampleSettingsProvider : IHaveDefaultSettingsStream
 {
     public string Name => "ReSharper SDK";
