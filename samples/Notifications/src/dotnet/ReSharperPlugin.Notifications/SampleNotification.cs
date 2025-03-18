@@ -1,12 +1,14 @@
 using JetBrains.Application.Notifications;
+using JetBrains.Application.Parts;
 using JetBrains.Lifetimes;
 using JetBrains.ProjectModel;
 using JetBrains.ProjectModel.Tasks;
+using JetBrains.ReSharper.UnitTestFramework.Resources;
 using JetBrains.Util;
 
 namespace ReSharperPlugin.Notifications;
 
-[SolutionComponent]
+[SolutionComponent(Instantiation.ContainerAsyncAnyThreadSafe)]
 internal class SampleNotification
 {
     private readonly Lifetime _lifetime;
