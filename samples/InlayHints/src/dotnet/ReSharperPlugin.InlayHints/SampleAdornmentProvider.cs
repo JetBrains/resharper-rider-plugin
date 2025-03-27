@@ -1,10 +1,11 @@
+using JetBrains.Application.Parts;
 using JetBrains.ProjectModel;
 using JetBrains.TextControl.DocumentMarkup;
 using JetBrains.TextControl.DocumentMarkup.Adornments;
 
 namespace ReSharperPlugin.InlayHints;
 
-[SolutionComponent]
+[SolutionComponent(Instantiation.DemandAnyThreadSafe)]
 public class SampleAdornmentProvider : IHighlighterAdornmentProvider
 {
     public bool IsValid(IHighlighter highlighter)

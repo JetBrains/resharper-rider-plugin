@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Application.Parts;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.CodeInsights;
 using JetBrains.Rider.Model;
@@ -6,7 +7,7 @@ using JetBrains.Util;
 
 namespace ReSharperPlugin.CodeVision;
 
-[SolutionComponent]
+[SolutionComponent(Instantiation.ContainerAsyncPrimaryThread)]
 public class SampleCodeInsightsProvider : ICodeInsightsProvider
 {
     public bool IsAvailableIn(ISolution solution)
@@ -26,7 +27,7 @@ public class SampleCodeInsightsProvider : ICodeInsightsProvider
 
     public string ProviderId => nameof(SampleCodeInsightsProvider);
     public string DisplayName => $"ReSharper SDK: {nameof(SampleCodeInsightsProvider)}.{nameof(DisplayName)}";
-    
+
     public CodeVisionAnchorKind DefaultAnchor => CodeVisionAnchorKind.Top;
 
     public ICollection<CodeVisionRelativeOrdering> RelativeOrderings => new List<CodeVisionRelativeOrdering>

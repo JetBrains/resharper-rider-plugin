@@ -1,3 +1,4 @@
+using JetBrains.Application.Parts;
 using JetBrains.Application.UI.Icons.CommonThemedIcons;
 using JetBrains.Application.UI.Options.Options.ThemedIcons;
 using JetBrains.Application.UI.ToolWindowManagement;
@@ -19,7 +20,7 @@ using NuGet;
 
 namespace ReSharperPlugin.CefToolWindow.ToolWindow;
 
-[SolutionComponent]
+[SolutionComponent(Instantiation.LaterAsyncOnlyPrimaryThread)]
 public class CefToolWindowManager
 {
     public const string Schema = "resharper-plugin";

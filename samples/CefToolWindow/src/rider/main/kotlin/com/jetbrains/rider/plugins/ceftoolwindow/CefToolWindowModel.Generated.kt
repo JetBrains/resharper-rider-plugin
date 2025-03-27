@@ -27,7 +27,8 @@ class CefToolWindowModel private constructor(
     companion object : ISerializersOwner {
         
         override fun registerSerializersCore(serializers: ISerializers)  {
-            serializers.register(BeCefToolWindowPanel)
+            val classLoader = javaClass.classLoader
+            serializers.register(LazyCompanionMarshaller(RdId(-1681759496957397842), classLoader, "com.jetbrains.rd.ide.model.BeCefToolWindowPanel"))
         }
         
         
@@ -134,6 +135,7 @@ class BeCefToolWindowPanel private constructor(
     
     companion object : IMarshaller<BeCefToolWindowPanel> {
         override val _type: KClass<BeCefToolWindowPanel> = BeCefToolWindowPanel::class
+        override val id: RdId get() = RdId(-1681759496957397842)
         
         @Suppress("UNCHECKED_CAST")
         override fun read(ctx: SerializationCtx, buffer: AbstractBuffer): BeCefToolWindowPanel  {

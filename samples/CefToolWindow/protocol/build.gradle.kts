@@ -23,7 +23,7 @@ val RiderPluginId: String by rootProject
 
 rdgen {
     val csOutput = File(rootDir, "src/dotnet/${DotnetPluginId}")
-    val ktOutput = File(rootDir, "src/rider/main/kotlin/com/jetbrains/rider/plugins/${RiderPluginId.replace('.','/').toLowerCase()}")
+    val ktOutput = File(rootDir, "src/rider/main/kotlin/${RiderPluginId.replace('.','/').toLowerCase()}")
 
     verbose = true
     packages = "model.rider"
@@ -38,7 +38,7 @@ rdgen {
 
     generator {
         language = "csharp"
-        transform = "reversed"
+        transform = "symmetric"
         root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
         namespace = "JetBrains.Rider.Model"
         directory = "$csOutput"
