@@ -1,7 +1,7 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <SdkVersion>2024.1.0</SdkVersion>
+    <SdkVersion>2024.3.6</SdkVersion>
 
     <Title>ReSharper SDK – Options</Title>
     <Description>Adds an option page to the settings dialog.</Description>
