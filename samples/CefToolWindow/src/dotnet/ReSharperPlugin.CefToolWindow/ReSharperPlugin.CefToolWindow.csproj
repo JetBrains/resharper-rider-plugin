@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf" Version="105.3.390" PrivateAssets="all" />
+    <PackageReference Include="CefSharp.Wpf" Version="134.3.90" PrivateAssets="all" />
     <PackageReference Include="JetBrains.ReSharper.SDK" Version="$(SdkVersion)" PrivateAssets="all" />
     <PackageReference Include="Wave" Version="$(WaveVersion)" />
   </ItemGroup>
