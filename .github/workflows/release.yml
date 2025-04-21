@@ -1,0 +1,30 @@
+name: template
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: .\content\tools\nuget.exe pack JetBrains.ReSharper.SamplePlugin.nuspec -NoPackageAnalysis -NoDefaultExcludes -Version ${{ github.ref_name }}
+      - uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
+          draft: true
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: JetBrains.ReSharper.SamplePlugin.${{ github.ref_name }}.nupkg
+          asset_name: JetBrains.ReSharper.SamplePlugin.${{ github.ref_name }}.nupkg
+          asset_content_type: application/zip
