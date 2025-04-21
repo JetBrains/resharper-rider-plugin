@@ -31,15 +31,15 @@ This will create a new folder with all the structure ready to go and all identif
 
 This repository contains a few sample projects for various extension points:
 
-- [Actions](samples/Actions)
-- [Code Inspections](samples/CodeInspections)
-- [Code Vision](samples/CodeVision)
-- [Inlay Hints](samples/InlayHints)
-- [Notifications](samples/Notifications)
-- [Option Pages](samples/OptionPages)
-- [Postfix Templates](samples/PostfixTemplates)
-- [Rd Protocol](samples/RdProtocol)
-- [Settings Provider](samples/SettingsProvider)
+- [Actions](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/Actions)
+- [Code Inspections](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/CodeInspections)
+- [Code Vision](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/CodeVision)
+- [Inlay Hints](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/InlayHints)
+- [Notifications](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/Notifications)
+- [Option Pages](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/OptionPages)
+- [Postfix Templates](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/PostfixTemplates)
+- [Rd Protocol](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/RdProtocol)
+- [Settings Provider](https://github.com/JetBrains/resharper-rider-plugin/tree/fed252a46dd66ae2f3b012fac3db0d51049ea3fb/samples/SettingsProvider)
 
 ## Development
 
