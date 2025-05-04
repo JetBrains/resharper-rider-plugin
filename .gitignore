@@ -1,4 +1,4 @@
-/template/TestPlugin
+/TestPlugin
 /.idea
 *.nupkg
 .nuke/
