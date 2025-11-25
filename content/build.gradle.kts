@@ -67,7 +67,7 @@ val setBuildTool by tasks.registering {
             val stdout = ByteArrayOutputStream()
             exec {
                 executable("${rootDir}\\tools\\vswhere.exe")
-                args("-latest", "-property", "installationPath", "-products", "*")
+                args("-latest", "-property", "installationPath")
                 standardOutput = stdout
                 workingDir(rootDir)
             }
