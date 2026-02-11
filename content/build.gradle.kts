@@ -2,7 +2,6 @@ import com.jetbrains.plugin.structure.base.utils.isFile
 import groovy.ant.FileNameFinder
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.jetbrains.intellij.platform.gradle.Constants
-import java.io.ByteArrayOutputStream
 
 plugins {
     id("java")
@@ -48,56 +47,58 @@ sourceSets {
     }
 }
 
+var buildToolExecutable: String? = null
+var buildToolArgs: List<String>? = null
+
 val setBuildTool by tasks.registering {
     doLast {
-        extra["executable"] = "dotnet"
+        var executable = "dotnet"
         var args = mutableListOf("msbuild")
 
         if (isWindows) {
-            val stdout = ByteArrayOutputStream()
-            exec {
+            val execResult = providers.exec {
                 executable("${rootDir}\\tools\\vswhere.exe")
                 args("-latest", "-property", "installationPath", "-products", "*")
-                standardOutput = stdout
                 workingDir(rootDir)
             }
 
-            val directory = stdout.toString().trim()
+            val directory = execResult.standardOutput.asText.get().trim()
             if (directory.isNotEmpty()) {
                 val files = FileNameFinder().getFileNames("${directory}\\MSBuild", "**/MSBuild.exe")
-                extra["executable"] = files.get(0)
+                executable = files.get(0)
                 args = mutableListOf("/v:minimal")
             }
         }
 
-        args.add("${DotnetSolution}")
+        args.add(DotnetSolution)
         args.add("/p:Configuration=${BuildConfiguration}")
         args.add("/p:HostFullIdentifier=")
-        extra["args"] = args
+
+        buildToolExecutable = executable
+        buildToolArgs = args
     }
 }
 
 val compileDotNet by tasks.registering {
     dependsOn(setBuildTool)
     doLast {
-        val executable: String by setBuildTool.get().extra
-        val arguments = (setBuildTool.get().extra["args"] as List<String>).toMutableList()
+        val arguments = buildToolArgs!!.toMutableList()
         arguments.add("/t:Restore;Rebuild")
-        exec {
-            executable(executable)
+        providers.exec {
+            executable(buildToolExecutable!!)
             args(arguments)
             workingDir(rootDir)
-        }
+        }.result.get()
     }
 }
 
 val testDotNet by tasks.registering {
     doLast {
-        exec {
+        providers.exec {
             executable("dotnet")
             args("test","${DotnetSolution}","--logger","GitHubActions")
             workingDir(rootDir)
-        }
+        }.result.get()
     }
 }
 
@@ -115,23 +116,24 @@ tasks.buildPlugin {
             it.groups[1]!!.value.replace("(?s)- ".toRegex(), "\u2022 ").replace("`", "").replace(",", "%2C").replace(";", "%3B")
         }.take(1).joinToString()
 
-        val executable: String by setBuildTool.get().extra
-        val arguments = (setBuildTool.get().extra["args"] as List<String>).toMutableList()
+        val arguments = buildToolArgs!!.toMutableList()
         arguments.add("/t:Pack")
         arguments.add("/p:PackageOutputPath=${rootDir}/output")
         arguments.add("/p:PackageReleaseNotes=${changeNotes}")
         arguments.add("/p:PackageVersion=${version}")
-        exec {
-            executable(executable)
+        providers.exec {
+            executable(buildToolExecutable!!)
             args(arguments)
             workingDir(rootDir)
-        }
+        }.result.get()
     }
 }
 
 dependencies {
     intellijPlatform {
-        rider(ProductVersion, useInstaller = false)
+        rider(ProductVersion) {
+            useInstaller = false
+        }
         jetbrainsRuntime()
 
         // TODO: add plugins
@@ -166,16 +168,16 @@ tasks.prepareSandbox {
             // TODO: add additional assemblies
     )
 
-    dllFiles.forEach({ f ->
+    dllFiles.forEach { f ->
         val file = file(f)
-        from(file, { into("${rootProject.name}/dotnet") })
-    })
+        from(file) { into("${rootProject.name}/dotnet") }
+    }
 
     doLast {
-        dllFiles.forEach({ f ->
+        dllFiles.forEach { f ->
             val file = file(f)
-            if (!file.exists()) throw RuntimeException("File ${file} does not exist")
-        })
+            if (!file.exists()) throw RuntimeException("File $file does not exist")
+        }
     }
 }
 
@@ -185,11 +187,11 @@ tasks.publishPlugin {
     token.set("${PublishToken}")
 
     doLast {
-        exec {
+        providers.exec {
             executable("dotnet")
             args("nuget","push","output/${DotnetPluginId}.${version}.nupkg","--api-key","${PublishToken}","--source","https://plugins.jetbrains.com")
             workingDir(rootDir)
-        }
+        }.result.get()
     }
 }
 
