@@ -48,10 +48,6 @@ sourceSets {
     }
 }
 
-tasks.compileKotlin {
-    kotlinOptions { jvmTarget = "17" }
-}
-
 val setBuildTool by tasks.registering {
     doLast {
         extra["executable"] = "dotnet"
